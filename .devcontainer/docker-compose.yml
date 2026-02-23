@@ -1,0 +1,53 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UBUNTU_VERSION: "24.04"
+        CUDA_VERSION: "12.6.3-cudnn"
+        CUDA_VARIANT: "ubuntu22.04"
+        UV_VERSION: "0.9.21"
+        PYTHON_VERSION: "3.13"
+        NVM_VERSION: "v0.40.3"
+        NODE_VERSION: "24.12.0"
+        USER: "${USER:-vscode}"
+        USER_UID: "${UID:-1000}"
+        USER_GID: "${GID:-1000}"
+        PROJDIR: "/workspaces/Minimal10DigitTransformer"
+
+        INCLUDE_NODE: "n"
+        INCLUDE_POSTGRESQL_CLIENT: "n"
+        INCLUDE_REDIS_TOOLS: "n"
+        INCLUDE_AWS_CLI: "n"
+        INCLUDE_AWS_SAM: "n"
+        INCLUDE_ANDROID_ADB: "n"
+
+        INCLUDE_PLAYWRIGHT_SYSTEM_DEPS: "n"
+        INCLUDE_OCR_PDF_STACK: "n"
+        INCLUDE_SAGEMATH: "n"
+        INCLUDE_GITHUB_CLI: "n"
+        INCLUDE_JEKYLL_LATEX: "n"
+
+        INCLUDE_EXPO_TOOLCHAIN: "n"
+        INCLUDE_VERCEL_CLI: "n"
+        INCLUDE_SUPABASE_CLI: "n"
+        INCLUDE_CDK_TOOLCHAIN: "n"
+    runtime: nvidia
+    volumes:
+      - ..:/workspaces/Minimal10DigitTransformer:cached
+      - ${HOME}/.bash_history:/home/${USER:-vscode}/.bash_history
+      - ${HOME}/.cache:/home/${USER:-vscode}/.cache
+      - ${HOME}/.claude:/home/${USER:-vscode}/.claude
+      - ${HOME}/.vscode-server:/home/${USER:-vscode}/.vscode-server
+    environment:
+      - DEVCONTAINER=true
+      - NVIDIA_VISIBLE_DEVICES=all
+    command: sleep infinity
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

@@ -1,0 +1,40 @@
+[project]
+name = "Minimal10DigitTransformer"
+version = "0.1.0"
+description = "A minimal transformer for 10-digit recognition with NVIDIA GPU support"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+  { name = "Tom Bukic", email = "tom@ac8.ai" }
+]
+dependencies = [
+  "attrs>=24.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0",
+  "ruff>=0.8.0",
+  "ipykernel>=6.29.0",
+]
+
+[project.scripts]
+minimal10digittransformer = "minimal10digittransformer.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/minimal10digittransformer"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
