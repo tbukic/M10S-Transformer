@@ -9,6 +9,8 @@ authors = [
 ]
 dependencies = [
   "attrs>=24.0.0",
+  "wandb>=0.25.0",
+  "weave>=0.52.28",
 ]
 
 [project.optional-dependencies]
