@@ -1,14 +1,14 @@
 {
-  "name": "Minimal10DigitTransformer",
+  "name": "Minimal10DigitTransformer-try2",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
-  "workspaceFolder": "/workspaces/Minimal10DigitTransformer",
+  "workspaceFolder": "/workspaces/Minimal10DigitTransformer-try2",
   "containerEnv": {
-    "UV_PROJECT_ENVIRONMENT": "/workspaces/Minimal10DigitTransformer/.venv"
+    "UV_PROJECT_ENVIRONMENT": "/workspaces/Minimal10DigitTransformer-try2/.venv"
   },
   "postCreateCommand": "uv sync --extra dev",
   "forwardPorts": [
-    8000
+    8001
   ],
   "customizations": {
     "vscode": {

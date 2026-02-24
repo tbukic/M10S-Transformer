@@ -31,10 +31,25 @@ If `nvidia_cuda`:
 - `PROJECT_ROOT`
 - `DATA_DIR` (from `APP_DATA_DIR` env or fallback to `<project>/data`)
 
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in your values:
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `WANDB_API_KEY` | Yes | Weights & Biases API key (from https://wandb.ai/authorize) |
+
+The `.env` file is loaded by docker-compose via `env_file` and is git-ignored.
+
 ## Quick Start
 
 ```bash
 cp .env.example .env
+# Edit .env and set WANDB_API_KEY
 uv sync --extra dev
 ```
 
