@@ -1,38 +1,37 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.venv/
-venv/
+# Ignore everything — only explicitly allowed files are tracked
+*
 
-# Build outputs
-build/
-dist/
-*.egg-info/
-
-# Tests and coverage
-.coverage
-coverage.xml
-htmlcov/
-
-# Environment
-.env
-.env.*
+# Top-level files
+!.gitignore
+!.python-version
 !.env.example
+!Dockerfile
+!LICENSE
+!README.md
+!docker-compose.yml
+!pyproject.toml
+!uv.lock
 
-# IDE/editor
-.vscode/
-.idea/
-.DS_Store
+# .claude/
+!.claude/
+!.claude/*.md
 
-# Node/frontend
-node_modules/
-frontend/node_modules/
-frontend/dist/
+# .devcontainer/
+!.devcontainer/
+!.devcontainer/*
 
-# Docker
-*.log
+# Source
+!src/
+!src/**/
+!src/**/*.py
+
+# Tests
+!tests/
+!tests/**/
+!tests/**/*.py
+
+# Notebooks
+!notebooks/
+!notebooks/**/
+!notebooks/**/*.md
+!notebooks/**/*.ipynb
