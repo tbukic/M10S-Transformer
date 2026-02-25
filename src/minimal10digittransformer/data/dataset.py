@@ -72,9 +72,11 @@ class AdditionDataset(Dataset):
         # For causal LM: input is the full sequence, target is shifted
         tokens = torch.tensor(full_seq, dtype=torch.long)
 
-        # Create target: -100 for input positions (don't compute loss), actual tokens for output
+        # For causal LM: labels[t] = tokens[t+1] (next token prediction)
+        # Only compute loss on output positions
+        # labels[input_len-1] = tokens[input_len] = first output token
         target = torch.full((total_len,), -100, dtype=torch.long)
-        target[input_len:] = tokens[input_len:]
+        target[input_len - 1:-1] = tokens[input_len:]
 
         return {
             "input_ids": tokens,

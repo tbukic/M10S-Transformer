@@ -81,10 +81,11 @@ def generate_addition_batch_gpu(
     # Full sequence: A + B = C
     input_ids = torch.cat([a_input, plus_token, b_input, eq_token, c_output], dim=1)
 
-    # Labels: -100 for input positions, actual values for output
+    # For causal LM: labels[t] = input_ids[t+1] (next token prediction)
+    # logits[input_len-1] predicts input_ids[input_len] = C0
     input_len = max_digits * 2 + 2  # A + + + B + =
     labels = torch.full_like(input_ids, -100)
-    labels[:, input_len:] = c_output
+    labels[:, input_len - 1:-1] = c_output
 
     return input_ids, labels
 

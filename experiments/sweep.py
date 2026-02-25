@@ -53,8 +53,14 @@ def generate_batch(batch_size, max_digits, device):
 
     input_ids = torch.cat([a_t, plus, b_t, eq, c_t], dim=1)
     input_len = max_digits * 2 + 2
+
+    # For causal LM: labels[t] = input_ids[t+1] (next token prediction)
+    # We only want loss on output positions
+    # logits[input_len-1] should predict input_ids[input_len] = C0
+    # logits[input_len] should predict input_ids[input_len+1] = C1
+    # So labels[input_len-1] = C0, labels[input_len] = C1, etc.
     labels = torch.full_like(input_ids, -100)
-    labels[:, input_len:] = c_t
+    labels[:, input_len - 1:-1] = c_t
 
     return input_ids, labels
 

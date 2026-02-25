@@ -74,7 +74,7 @@ def evaluate_model(
 
             # Get predictions for output positions only
             input_len = tokenizer.input_length
-            pred_logits = logits[:, input_len - 1 : -1, :]  # Shifted for causal
+            pred_logits = logits[:, input_len - 1:-1, :]
             predictions = pred_logits.argmax(dim=-1)
 
             # Check accuracy
@@ -146,7 +146,7 @@ def evaluate_by_difficulty(
             logits = model(input_tensor)
 
             input_len = tokenizer.input_length
-            pred_logits = logits[:, input_len - 1 : -1, :]
+            pred_logits = logits[:, input_len - 1:-1, :]
             predictions = pred_logits.argmax(dim=-1)
 
             for i, (a, b) in enumerate(pairs):
