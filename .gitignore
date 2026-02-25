@@ -35,3 +35,26 @@
 !notebooks/**/
 !notebooks/**/*.md
 !notebooks/**/*.ipynb
+
+# Reports
+!reports/
+!reports/**/
+!reports/**/*.md
+!reports/**/*.tex
+!reports/**/*.bib
+
+# Experiments
+!experiments/
+!experiments/**/
+!experiments/**/*.py
+!experiments/**/*.json
+!experiments/**/*.yaml
+
+# Configs
+!configs/
+!configs/**/
+!configs/**/*.json
+!configs/**/*.yaml
+
+# Task description
+!TASK.md
