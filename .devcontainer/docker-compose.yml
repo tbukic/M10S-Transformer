@@ -4,7 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        UBUNTU_VERSION: "24.04"
         CUDA_VERSION: "12.6.3-cudnn"
         CUDA_VARIANT: "ubuntu22.04"
         UV_VERSION: "0.9.21"
@@ -41,7 +40,7 @@ services:
       - ${HOME}/.bash_history:/home/${USER:-vscode}/.bash_history
       - ${HOME}/.cache:/home/${USER:-vscode}/.cache
       - ${HOME}/.claude:/home/${USER:-vscode}/.claude
-      - ${HOME}/.vscode-server-try2:/home/${USER:-vscode}/.vscode-server
+      - ${HOME}/.vscode-server:/home/${USER:-vscode}/.vscode-server
     environment:
       - DEVCONTAINER=true
       - NVIDIA_VISIBLE_DEVICES=all

@@ -1,4 +1,3 @@
-ARG UBUNTU_VERSION="24.04"
 ARG CUDA_VERSION="12.6.3-cudnn"
 ARG CUDA_VARIANT="ubuntu22.04"
 ARG UV_VERSION="0.9.21"
@@ -81,9 +80,6 @@ RUN set -eux; \
       PKGS="${PKGS} tesseract-ocr tesseract-ocr-eng tesseract-ocr-osd poppler-utils libmagic1 pandoc libreoffice libpng-dev libjpeg-dev libtiff-dev"; \
     fi; \
     if [ "${INCLUDE_SAGEMATH}" = "y" ]; then PKGS="${PKGS} sagemath"; fi; \
-    if [ "${INCLUDE_JEKYLL_LATEX}" = "y" ]; then \
-      PKGS="${PKGS} ruby-full zlib1g-dev texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-xetex"; \
-    fi; \
     apt-get update -y; \
     apt-get install -y --no-install-recommends ${PKGS}; \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen; \
@@ -105,6 +101,13 @@ RUN set -eux; \
     chmod 0440 /etc/sudoers.d/${USER}; \
     rm -rf /var/lib/apt/lists/*; \
     apt-get clean
+
+RUN if [ "${INCLUDE_JEKYLL_LATEX}" = "y" ]; then \
+      apt-get update -y; \
+      apt-get install -y ruby-full zlib1g-dev texlive-latex-base texlive-latex-extra \
+        texlive-fonts-recommended texlive-fonts-extra texlive-xetex; \
+      rm -rf /var/lib/apt/lists/*; \
+    fi
 
 USER ${USER}
 ENV USER=${USER}
