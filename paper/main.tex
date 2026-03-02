@@ -779,11 +779,14 @@ Notable concurrent work includes: a pending 67-parameter model
 output, and carry-heavy curriculum---currently the only trained model
 smaller than ours; and hand-coded models reaching as low as 20 parameters
 with constructive weight assignment.
-Staghado independently converged on the same 122-parameter Qwen3
-architecture (d=3, 1h, hd=4, ff=3, RoPE $\theta$=3), reaching 99.95\%
-accuracy. Their L-BFGS fine-tuning insight---that AdamW converges to
-saddle points which second-order methods can escape---directly inspired
-our L-BFGS experiments (Section~\ref{sec:lbfgs}).
+Our base architecture builds on staghado's 122-parameter Qwen3 model
+(d=3, 1h, hd=4, ff=3, RoPE $\theta$=3), which reaches 99.95\% accuracy.
+Our contributions are the parameter compression chain
+(tieKV, tieQO, shared norms: $122 \to 83$ parameters) and targeted
+fine-tuning for 100\% accuracy. Their L-BFGS fine-tuning insight---that
+AdamW converges to saddle points which second-order methods can
+escape---also directly inspired our L-BFGS experiments
+(Section~\ref{sec:lbfgs}).
 
 % ══════════════════════════════════════════════════════════════════════════
 \section{Limitations}

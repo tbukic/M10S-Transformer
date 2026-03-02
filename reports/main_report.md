@@ -390,7 +390,7 @@ The 4-stage pipeline that produced the 100% 89p model:
 | Author | Params | Accuracy | Status | Notes |
 |--------|--------|----------|--------|-------|
 | **evindor** | **67 trained** | **100%** | Pending (#50) | Parametric circular embed, rank-1 output, carry-mix curriculum (80%). Would beat our 83p if accepted. |
-| staghado | 122 | 99.95% | Pending (#51) | Same Qwen3 d=3 1h hd=4 ff=3 RoPE theta=3 architecture (arrived at independently). We adopted their L-BFGS fine-tuning insight (Section 6.3). Our original contributions: compression chain 122→83p via tieKV/tieQO/norm sharing, and targeted FT. |
+| staghado | 122 | 99.95% | Pending (#51) | Our base architecture builds on their Qwen3 d=3 1h hd=4 ff=3 RoPE theta=3. We also adopted their L-BFGS insight. Our contributions: compression chain 122→83p (tieKV/tieQO/norm sharing) and targeted FT. |
 | fblissjr | 162 | 100% | Pending (#55) | Hybrid: hand-coded attention mask + 162 trained weights |
 | Deferf | 37 | 100% | Pending (#56) | **SUSPICIOUS**: verify.py output shows 95,396 params; describes itself as "Hardcoded Pair-Token Adder" |
 | fblissjr | 33 | 100% | Pending (#54) | **Hand-coded** — would be #1 in hand-coded track |
