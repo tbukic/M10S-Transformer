@@ -82,7 +82,7 @@ def evaluate(model, n_samples, max_digits, device, seed=42):
             input_ids, labels = generate_batch(bs, max_digits, device)
             logits = model(input_ids)
             preds = logits[:, input_len - 1:-1, :].argmax(dim=-1)
-            targets = labels[:, input_len:]
+            targets = input_ids[:, input_len:]
             correct += (preds == targets).all(dim=1).sum().item()
             total += bs
 

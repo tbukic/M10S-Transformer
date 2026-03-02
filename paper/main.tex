@@ -679,8 +679,9 @@ computation and digit-output scaling in a shared parameter space.
 % ══════════════════════════════════════════════════════════════════════════
 
 \subsection{L-BFGS fine-tuning}
+\label{sec:lbfgs}
 
-Inspired by concurrent work on the AdderBoard showing that AdamW
+Inspired by staghado's concurrent work on the AdderBoard showing that AdamW
 converges to saddle points, we apply L-BFGS \citep{liu1989limited}
 fine-tuning to our checkpoints. L-BFGS uses Hessian approximation via
 strong Wolfe line search ($\text{lr}=0.5$--1.0, batch size 1024, 200--300
@@ -760,7 +761,8 @@ Params & Author & Accuracy & Architecture & Key technique \\
 86  & Ours & 100\%$^\dagger$     & Qwen3, d=3, 1h, ff=2 & L-BFGS + targeted \\
 \textbf{89}  & \textbf{Ours} & \textbf{100\%} & \textbf{Qwen3, d=3, 1h, ff=2} & \textbf{4-stage natural FT} \\
 101 & Ours & 100\%$^\dagger$     & Qwen3, d=3, 1h, ff=2 & Targeted (2 pairs) \\
-122 & Ours \& staghado & 100\% / 99.95\%      & Qwen3, d=3, 1h, ff=3 & Cosine + grokking \\
+122 & Ours       & 100\%      & Qwen3, d=3, 1h, ff=3 & Cosine + grokking \\
+122 & staghado   & 99.95\%    & Qwen3, d=3, 1h, ff=3 & AdamW + L-BFGS \\
 162 & fblissjr  & 100\%     & 1L, d=3, 3h, ff=6  & Fixed attn mask (hybrid) \\
 262 & lichengliu03 & 99.95\% & 1L, d=4, 1h, ff=6 & Rank-3, curriculum \\
 275 & ryanyord  & 99.98\%   & 1L, d=4, 1h, ff=8  & SVD truncation of 311p \\
@@ -775,10 +777,13 @@ All ``Ours'' results verified at 100.00\% on official \texttt{verify.py} (10,010
 Notable concurrent work includes: a pending 67-parameter model
 (MicroAdder) using parametric circular embeddings, rank-1 attention
 output, and carry-heavy curriculum---currently the only trained model
-smaller than ours; independent reproduction of the 122-parameter Qwen3
-architecture by staghado (confirming reproducibility at 99.95\%); and
-hand-coded models reaching as low as 20 parameters with constructive
-weight assignment.
+smaller than ours; and hand-coded models reaching as low as 20 parameters
+with constructive weight assignment.
+Staghado independently converged on the same 122-parameter Qwen3
+architecture (d=3, 1h, hd=4, ff=3, RoPE $\theta$=3), reaching 99.95\%
+accuracy. Their L-BFGS fine-tuning insight---that AdamW converges to
+saddle points which second-order methods can escape---directly inspired
+our L-BFGS experiments (Section~\ref{sec:lbfgs}).
 
 % ══════════════════════════════════════════════════════════════════════════
 \section{Limitations}

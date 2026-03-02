@@ -1,0 +1,10 @@
+{
+  "config": "122p",
+  "wd_schedule": "metric_triggered",
+  "seed": 1,
+  "n_params": 122,
+  "best_acc": 0.0,
+  "grok_step": null,
+  "elapsed": 438.6972408294678,
+  "steps": 50000
+}

@@ -120,7 +120,7 @@ def evaluate_fast(
             pred_logits = logits[:, input_len - 1:-1, :]
             predictions = pred_logits.argmax(dim=-1)
 
-            targets = labels[:, input_len:]
+            targets = input_ids[:, input_len:]
 
             # Exact match
             matches = (predictions == targets).all(dim=1)

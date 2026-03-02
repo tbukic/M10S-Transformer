@@ -1,0 +1,10 @@
+{
+  "config": "122p",
+  "wd_schedule": "const_0.01",
+  "seed": 0,
+  "n_params": 122,
+  "best_acc": 0.0,
+  "grok_step": null,
+  "elapsed": 2.8737382888793945,
+  "steps": 200
+}
