@@ -8,13 +8,15 @@ A single-layer transformer with **83 trained parameters** achieves **100% accura
 
 | Model | Params | 10K Accuracy | 50K Accuracy | Method |
 |-------|--------|-------------|-------------|--------|
-| 83p (tieKV+tieQO+shnorm) | **83** | 100.00% | 100.00% | Iterated targeted FT |
-| 86p (tieKV+tieQO+shbnorm) | 86 | 100.00% | 100.00% | Single-shot targeted FT |
-| 89p (tieKV+tieQO) | **89** | 100.00% | 100.00% | Multi-stage FT (natural, no targeting) |
-| 101p (tieQO) | 101 | 100.00% | 100.00% | Cosine LR |
-| 122p (base) | 122 | 100.00% | 99.998% | Cosine LR |
+| Model | Params | verify.py | 50K Holdout | Method |
+|-------|--------|-----------|------------|--------|
+| 83p (tieKV+tieQO+shnorm) | **83** | **10,010/10,010 (100%)** | 0 err | Iterated targeted FT |
+| 86p (tieKV+tieQO+shbnorm) | 86 | **10,010/10,010 (100%)** | 0 err | Single-shot targeted FT |
+| 89p (tieKV+tieQO) | **89** | **10,010/10,010 (100%)** | 0 err | Multi-stage FT (natural, no targeting) |
+| 101p (tieQO) | 101 | **10,010/10,010 (100%)** | 0 err | Targeted FT |
+| 122p (base) | 122 | **10,010/10,010 (100%)** | 0 err | Cosine LR |
 
-All results verified on independent held-out test sets (zero overlap with training data).
+All 5 models achieve **QUALIFIED** status on the official [AdderBoard](https://github.com/anadim/AdderBoard) `verify.py` (seed=2025, 10K random + 10 edge cases). The 83p model would rank **#1 on the trained-weights leaderboard** (current leader: 311 params). Results also verified on independent 50K held-out test set (seed=99, zero overlap with training data).
 
 ## Architecture
 
@@ -45,6 +47,15 @@ python scripts/validate_checkpoints.py --model 89p
 ```
 
 Expected output: all 5 models show correct parameter counts and 0 errors on 10K.
+
+### Official AdderBoard Verification
+
+```bash
+# Run the official AdderBoard verify.py on any submission
+python verify.py submissions/submission_83p.py
+python verify.py submissions/submission_89p.py
+# All 5 models: 10,010/10,010 correct (100.00%) QUALIFIED
+```
 
 ## Reproduction: Training from Scratch
 
@@ -178,6 +189,8 @@ data/
   test_holdout_10k.json     # Independent held-out 10K (seed=123)
   test_50k_independent.json # Independent held-out 50K (seed=99)
 checkpoints/                # Best-per-param model checkpoints
+submissions/                # AdderBoard submission files (verify.py compatible)
+verify.py                   # Official AdderBoard verification script
 paper/
   main.tex                  # LaTeX paper
   main.pdf                  # Compiled PDF

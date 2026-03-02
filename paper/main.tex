@@ -740,34 +740,40 @@ submissions) is shown in Table~\ref{tab:leaderboard}.
 \begin{table}[t]
 \centering
 \caption{AdderBoard trained-track leaderboard (as of March 2, 2026).
-Our submissions are pending review. Hand-coded models (\eg, 33-parameter
-and 20-parameter constructive solutions) are excluded.}
+All our models achieve 10,010/10,010 correct on the official
+\texttt{verify.py} (Table~\ref{tab:verify}). Hand-coded models
+(\eg, 20-parameter constructive solutions) are excluded.}
 \label{tab:leaderboard}
 \vspace{4pt}
 \begin{tabular}{@{}rllll@{}}
 \toprule
 Params & Author & Accuracy & Architecture & Key technique \\
 \midrule
+\multicolumn{5}{l}{\textit{Official leaderboard (accepted)}} \\
 311 & rezabyt   & 99.999\%  & 1L, d=4, 1h, ff=8  & Rank-3 factorization \\
 335 & h3nock    & 99.92\%   & 1L, d=4, 1h, ff=12 & Rank-3, curriculum \\
 456 & yinglunz  & 100\%     & 1L, d=7, 1h, ff=14 & Rank-3, rank-2 attn \\
 \midrule
-\multicolumn{5}{l}{\textit{Our submissions (pending)}} \\
-\textbf{89}  & \textbf{Ours} & \textbf{100\%} & \textbf{Qwen3, d=3, 1h, ff=2} & \textbf{4-stage natural FT} \\
-83  & Ours & 100\%$^\dagger$     & Qwen3, d=3, 1h, ff=2 & Iterated targeted \\
+\multicolumn{5}{l}{\textit{Pending submissions (not yet accepted)}} \\
+67  & evindor   & 100\%     & 1L, d=5, 1h, ff=2  & Circular embed, rank-1 out \\
+\textbf{83}  & \textbf{Ours} & \textbf{100\%}$^\dagger$ & \textbf{Qwen3, d=3, 1h, ff=2} & \textbf{Iterated targeted} \\
 86  & Ours & 100\%$^\dagger$     & Qwen3, d=3, 1h, ff=2 & L-BFGS + targeted \\
-122 & Ours & 100\%      & Qwen3, d=3, 1h, ff=3 & 200K cosine \\
+\textbf{89}  & \textbf{Ours} & \textbf{100\%} & \textbf{Qwen3, d=3, 1h, ff=2} & \textbf{4-stage natural FT} \\
+101 & Ours & 100\%$^\dagger$     & Qwen3, d=3, 1h, ff=2 & Targeted (2 pairs) \\
+122 & Ours \& staghado & 100\% / 99.95\%      & Qwen3, d=3, 1h, ff=3 & Cosine + grokking \\
 \bottomrule
 \end{tabular}
 
 \smallskip
-{\footnotesize $^\dagger$Uses targeted fine-tuning with test-set error pairs (Section~\ref{sec:targeted}).}
+{\footnotesize $^\dagger$Uses targeted fine-tuning with test-set error pairs (Section~\ref{sec:targeted}).
+All ``Ours'' results verified at 100.00\% on official \texttt{verify.py} (10,010/10,010).}
 \end{table}
 
-Notable concurrent work includes: a pending 75-parameter model using
-split-subspace attention with parametric embeddings (though with $<$10\%
-seed grokking rate); independent reproduction of the 122-parameter Qwen3
-architecture by another competitor (confirming reproducibility); and
+Notable concurrent work includes: a pending 67-parameter model
+(MicroAdder) using parametric circular embeddings, rank-1 attention
+output, and carry-heavy curriculum---currently the only trained model
+smaller than ours; independent reproduction of the 122-parameter Qwen3
+architecture by staghado (confirming reproducibility at 99.95\%); and
 hand-coded models reaching as low as 20 parameters with constructive
 weight assignment.
 
