@@ -1,0 +1,134 @@
+{
+  "mode": "swa",
+  "n_params": 83,
+  "swa_count": 91,
+  "seed": 42,
+  "source": "checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s1101/best.pt",
+  "final_base_acc": 0.981,
+  "final_swa_acc": 0.9833,
+  "final_base_errors": 190,
+  "final_swa_errors": 167,
+  "steps": 20000,
+  "log": [
+    {
+      "step": 1000,
+      "base_acc": 0.985,
+      "swa_acc": 0.0,
+      "swa_count": 0
+    },
+    {
+      "step": 2000,
+      "base_acc": 0.98,
+      "swa_acc": 0.98,
+      "swa_count": 1
+    },
+    {
+      "step": 3000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 6
+    },
+    {
+      "step": 4000,
+      "base_acc": 0.98,
+      "swa_acc": 0.985,
+      "swa_count": 11
+    },
+    {
+      "step": 5000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 16
+    },
+    {
+      "step": 6000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 21
+    },
+    {
+      "step": 7000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 26
+    },
+    {
+      "step": 8000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 31
+    },
+    {
+      "step": 9000,
+      "base_acc": 0.98,
+      "swa_acc": 0.985,
+      "swa_count": 36
+    },
+    {
+      "step": 10000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 41
+    },
+    {
+      "step": 11000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 46
+    },
+    {
+      "step": 12000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 51
+    },
+    {
+      "step": 13000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 56
+    },
+    {
+      "step": 14000,
+      "base_acc": 0.98,
+      "swa_acc": 0.985,
+      "swa_count": 61
+    },
+    {
+      "step": 15000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 66
+    },
+    {
+      "step": 16000,
+      "base_acc": 0.98,
+      "swa_acc": 0.985,
+      "swa_count": 71
+    },
+    {
+      "step": 17000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 76
+    },
+    {
+      "step": 18000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 81
+    },
+    {
+      "step": 19000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 86
+    },
+    {
+      "step": 20000,
+      "base_acc": 0.985,
+      "swa_acc": 0.985,
+      "swa_count": 91
+    }
+  ]
+}

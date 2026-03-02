@@ -1,0 +1,10 @@
+{
+  "tag": "qwen3_d3_ff7_161p_gelu",
+  "n_params": 161,
+  "seed": 1,
+  "best_acc": 0.015,
+  "final_acc": 0.004,
+  "final_digit_acc": 0.5991818181818181,
+  "steps": 30000,
+  "elapsed": 227.40044951438904
+}

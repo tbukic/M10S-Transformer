@@ -1,0 +1,26 @@
+{
+  "d_model": 20,
+  "n_heads": 2,
+  "n_layers": 2,
+  "n_repeats": 0,
+  "d_ff": 20,
+  "vocab_size": 10,
+  "n_params": 5100,
+  "seed": 0,
+  "best_acc": 1.0,
+  "best_epoch": 3000,
+  "final_acc": 0.99996,
+  "final_per_digit": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9999600052833557,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ]
+}

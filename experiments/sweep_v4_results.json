@@ -1,0 +1,704 @@
+{
+  "phase1": [
+    {
+      "name": "d6_fr_15rep",
+      "seed": 0,
+      "n_params": 324,
+      "best_acc": 0.0734,
+      "best_epoch": 1500,
+      "final_acc": 0.0747,
+      "final_digit_acc": 0.6160666619737943,
+      "final_per_digit": [
+        0.7502599954605103,
+        0.0996600016951561,
+        0.9982799887657166
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.04834999889135361
+        },
+        "2": {
+          "exact_match": 0.0742,
+          "digit_accuracy_avg": 0.6163666596015295
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 832.2395703792572
+      },
+      "total_wall_time": 832.2395713329315,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d6_fr_15rep",
+      "seed": 1,
+      "n_params": 324,
+      "best_acc": 0.0881,
+      "best_epoch": 2000,
+      "final_acc": 0.08486,
+      "final_digit_acc": 0.671186663210392,
+      "final_per_digit": [
+        0.09831999987363815,
+        0.9166799783706665,
+        0.9985600113868713
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0324,
+          "digit_accuracy_avg": 0.1209000013768673
+        },
+        "2": {
+          "exact_match": 0.0839,
+          "digit_accuracy_avg": 0.6711000005404154
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 930.1885416507721
+      },
+      "total_wall_time": 930.1885421276093,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d6_fr_15rep",
+      "seed": 2,
+      "n_params": 324,
+      "best_acc": 0.0534,
+      "best_epoch": 1000,
+      "final_acc": 0.06204,
+      "final_digit_acc": 0.5687533418337504,
+      "final_per_digit": [
+        0.6060600280761719,
+        0.10221999883651733,
+        0.997979998588562
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.04699999839067459
+        },
+        "2": {
+          "exact_match": 0.0605,
+          "digit_accuracy_avg": 0.5676333407560984
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 928.6546223163605
+      },
+      "total_wall_time": 928.6546227931976,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d6_fr_15rep",
+      "seed": 3,
+      "n_params": 324,
+      "best_acc": 0.1057,
+      "best_epoch": 2500,
+      "final_acc": 0.10044,
+      "final_digit_acc": 0.6992266575495402,
+      "final_per_digit": [
+        0.9970399737358093,
+        0.10063999891281128,
+        1.0
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0083,
+          "digit_accuracy_avg": 0.14025000110268593
+        },
+        "2": {
+          "exact_match": 0.1001,
+          "digit_accuracy_avg": 0.6990000034372011
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 926.4370181560516
+      },
+      "total_wall_time": 926.4370188713074,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d6_fr_15rep",
+      "seed": 4,
+      "n_params": 324,
+      "best_acc": 0.7435,
+      "best_epoch": 1500,
+      "final_acc": 0.69102,
+      "final_digit_acc": 0.8860133488972982,
+      "final_per_digit": [
+        0.8656200170516968,
+        0.7950400114059448,
+        0.9973800182342529
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.23109999299049377
+        },
+        "2": {
+          "exact_match": 0.6878,
+          "digit_accuracy_avg": 0.8843999902407328
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 927.1674242019653
+      },
+      "total_wall_time": 927.1674244403839,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 0,
+      "n_params": 420,
+      "best_acc": 0.1634,
+      "best_epoch": 1500,
+      "final_acc": 0.19366,
+      "final_digit_acc": 0.6854333430528641,
+      "final_per_digit": [
+        0.8125600218772888,
+        0.2451000064611435,
+        0.9986400008201599
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.04845000058412552
+        },
+        "2": {
+          "exact_match": 0.1947,
+          "digit_accuracy_avg": 0.6874333322048187
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 883.6603417396545
+      },
+      "total_wall_time": 883.6603422164917,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 1,
+      "n_params": 420,
+      "best_acc": 0.9709,
+      "best_epoch": 1500,
+      "final_acc": 0.88474,
+      "final_digit_acc": 0.9615799983342489,
+      "final_per_digit": [
+        0.9973400235176086,
+        0.8877599835395813,
+        0.9996399879455566
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0093,
+          "digit_accuracy_avg": 0.1137000024318695
+        },
+        "2": {
+          "exact_match": 0.8845,
+          "digit_accuracy_avg": 0.9615000089009603
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 802.3917932510376
+      },
+      "total_wall_time": 802.3917934894562,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 2,
+      "n_params": 420,
+      "best_acc": 0.5787,
+      "best_epoch": 1500,
+      "final_acc": 0.72244,
+      "final_digit_acc": 0.8988533417383829,
+      "final_per_digit": [
+        0.794700026512146,
+        0.9025999903678894,
+        0.9992600083351135
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.05339999869465828
+        },
+        "2": {
+          "exact_match": 0.7242,
+          "digit_accuracy_avg": 0.8995999892552694
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 801.8972871303558
+      },
+      "total_wall_time": 801.8972873687744,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 3,
+      "n_params": 420,
+      "best_acc": 0.8064,
+      "best_epoch": 2500,
+      "final_acc": 0.96794,
+      "final_digit_acc": 0.9892133275667826,
+      "final_per_digit": [
+        0.9771199822425842,
+        0.9907000064849854,
+        0.9998199939727783
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.1501999981701374
+        },
+        "2": {
+          "exact_match": 0.9672,
+          "digit_accuracy_avg": 0.9890000025431315
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 800.6487874984741
+      },
+      "total_wall_time": 800.6487879753113,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 4,
+      "n_params": 420,
+      "best_acc": 0.2397,
+      "best_epoch": 2500,
+      "final_acc": 0.3003,
+      "final_digit_acc": 0.7461799879868826,
+      "final_per_digit": [
+        0.35826000571250916,
+        0.8819199800491333,
+        0.9983599781990051
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.04605000093579292
+        },
+        "2": {
+          "exact_match": 0.2988,
+          "digit_accuracy_avg": 0.7452000180880228
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 798.2587900161743
+      },
+      "total_wall_time": 798.2587904930115,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 0,
+      "n_params": 528,
+      "best_acc": 0.0744,
+      "best_epoch": 2500,
+      "final_acc": 0.08366,
+      "final_digit_acc": 0.6410399948557218,
+      "final_per_digit": [
+        0.8246399760246277,
+        0.10168000310659409,
+        0.9968000054359436
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.19015000015497208
+        },
+        "2": {
+          "exact_match": 0.0868,
+          "digit_accuracy_avg": 0.6422333444158236
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 799.9467577934265
+      },
+      "total_wall_time": 799.9467580318451,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 1,
+      "n_params": 528,
+      "best_acc": 0.593,
+      "best_epoch": 1500,
+      "final_acc": 0.7802,
+      "final_digit_acc": 0.9238866766293844,
+      "final_per_digit": [
+        0.9663800001144409,
+        0.811680018901825,
+        0.9936000108718872
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0106,
+          "digit_accuracy_avg": 0.10259999893605709
+        },
+        "2": {
+          "exact_match": 0.7723,
+          "digit_accuracy_avg": 0.9215666651725769
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 801.4218170642853
+      },
+      "total_wall_time": 801.4218173027039,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 2,
+      "n_params": 528,
+      "best_acc": 0.7737,
+      "best_epoch": 2500,
+      "final_acc": 0.83836,
+      "final_digit_acc": 0.9430133104324341,
+      "final_per_digit": [
+        0.951259970664978,
+        0.8790599703788757,
+        0.9987199902534485
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0578,
+          "digit_accuracy_avg": 0.22050000727176666
+        },
+        "2": {
+          "exact_match": 0.8401,
+          "digit_accuracy_avg": 0.9436666568120321
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 808.3145174980164
+      },
+      "total_wall_time": 808.3145174980164,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 3,
+      "n_params": 528,
+      "best_acc": 0.3271,
+      "best_epoch": 2500,
+      "final_acc": 0.44954,
+      "final_digit_acc": 0.7856866916020712,
+      "final_per_digit": [
+        0.6726800203323364,
+        0.6884400248527527,
+        0.9959400296211243
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.04735000059008598
+        },
+        "2": {
+          "exact_match": 0.4585,
+          "digit_accuracy_avg": 0.7902666727701823
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 808.9444994926453
+      },
+      "total_wall_time": 808.9444999694824,
+      "max_digits_reached": 2
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 4,
+      "n_params": 528,
+      "best_acc": 0.0498,
+      "best_epoch": 2500,
+      "final_acc": 0.06552,
+      "final_digit_acc": 0.5844133247931799,
+      "final_per_digit": [
+        0.6532999873161316,
+        0.10051999986171722,
+        0.9994199872016907
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0802,
+          "digit_accuracy_avg": 0.2741999998688698
+        },
+        "2": {
+          "exact_match": 0.0663,
+          "digit_accuracy_avg": 0.5866000006596247
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": 804.9272437095642
+      },
+      "total_wall_time": 804.9272441864014,
+      "max_digits_reached": 2
+    }
+  ],
+  "top3": [
+    {
+      "name": "d7_fr_15rep",
+      "seed": 1,
+      "best_acc": 0.9709
+    },
+    {
+      "name": "d7_fr_15rep",
+      "seed": 3,
+      "best_acc": 0.8064
+    },
+    {
+      "name": "d8_fr_15rep",
+      "seed": 2,
+      "best_acc": 0.7737
+    }
+  ],
+  "phase2": [
+    {
+      "name": "d7_fr_15rep_phase2",
+      "seed": 1,
+      "n_params": 420,
+      "best_acc": 0.6638,
+      "best_epoch": 500,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.09906909005208449,
+      "final_per_digit": [
+        0.09781999886035919,
+        0.09935999661684036,
+        0.10012000054121017,
+        0.09815999865531921,
+        0.0989999994635582,
+        0.10019999742507935,
+        0.1005999967455864,
+        0.0996600016951561,
+        0.10174000263214111,
+        0.09758000075817108,
+        0.09551999717950821
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.061,
+          "digit_accuracy_avg": 0.30570001155138016
+        },
+        "2": {
+          "exact_match": 0.0017,
+          "digit_accuracy_avg": 0.14830000201861063
+        },
+        "3": {
+          "exact_match": 0.102,
+          "digit_accuracy_avg": 0.7751000002026558
+        },
+        "4": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.2070000022649765
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.16591666514674822
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.156857145684106
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.08572500169975683
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.15808888607554966
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.13978000059723855
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.09910000115633011
+        }
+      },
+      "curriculum_history": [
+        [
+          500,
+          2,
+          0.6638
+        ]
+      ],
+      "level_times": {
+        "2": 129.8036322593689,
+        "3": 7892.0938720703125
+      },
+      "total_wall_time": 8021.898100852966,
+      "max_digits_reached": 3
+    },
+    {
+      "name": "d7_fr_15rep_phase2",
+      "seed": 3,
+      "n_params": 420,
+      "best_acc": 0.6162,
+      "best_epoch": 1500,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.08980545537038283,
+      "final_per_digit": [
+        0.09888000041246414,
+        0.09888000041246414,
+        0.10118000209331512,
+        0.09948000311851501,
+        0.0964599996805191,
+        0.10208000242710114,
+        0.10217999666929245,
+        0.10072000324726105,
+        0.08923999965190887,
+        0.09876000136137009,
+        0.0
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0915,
+          "digit_accuracy_avg": 0.3364499993622303
+        },
+        "2": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.0668666660785675
+        },
+        "3": {
+          "exact_match": 0.0091,
+          "digit_accuracy_avg": 0.5458750016987324
+        },
+        "4": {
+          "exact_match": 0.0001,
+          "digit_accuracy_avg": 0.2048200026154518
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.08261666571100552
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.08151428454688617
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.13662500120699406
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.10026666604810291
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.09117000056430698
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.09059999950907448
+        }
+      },
+      "curriculum_history": [
+        [
+          1500,
+          2,
+          0.6162
+        ]
+      ],
+      "level_times": {
+        "2": 402.04278540611267,
+        "3": 11379.913612127304
+      },
+      "total_wall_time": 11781.956941604614,
+      "max_digits_reached": 3
+    },
+    {
+      "name": "d8_fr_15rep_phase2",
+      "seed": 2,
+      "n_params": 528,
+      "best_acc": 0.672,
+      "best_epoch": 2500,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.13632908802140842,
+      "final_per_digit": [
+        0.1005999967455864,
+        0.10053999722003937,
+        0.09972000122070312,
+        0.09969999641180038,
+        0.1004600003361702,
+        0.09954000264406204,
+        0.09963999688625336,
+        0.09861999750137329,
+        0.10019999742507935,
+        0.09867999702692032,
+        0.5019199848175049
+      ],
+      "per_level_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.05034999921917915
+        },
+        "2": {
+          "exact_match": 0.0008,
+          "digit_accuracy_avg": 0.16553333650032678
+        },
+        "3": {
+          "exact_match": 0.0884,
+          "digit_accuracy_avg": 0.7561999894678593
+        },
+        "4": {
+          "exact_match": 0.0002,
+          "digit_accuracy_avg": 0.1303999975323677
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.18013333280881247
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.0982428565621376
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.0963375000283122
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.09586666772762935
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.14521999880671502
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.13553636453368448
+        }
+      },
+      "curriculum_history": [
+        [
+          2500,
+          2,
+          0.672
+        ]
+      ],
+      "level_times": {
+        "2": 827.77148604393,
+        "3": 11073.685133695602
+      },
+      "total_wall_time": 11901.457161664963,
+      "max_digits_reached": 3
+    }
+  ]
+}

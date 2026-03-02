@@ -1,0 +1,10 @@
+{
+  "tag": "qwen3_d3_ff2_95p_tieqo_tiegate",
+  "n_params": 95,
+  "seed": 13,
+  "best_acc": 0.37,
+  "final_acc": 0.299,
+  "final_digit_acc": 0.8993636363636364,
+  "steps": 50000,
+  "elapsed": 324.8730661869049
+}

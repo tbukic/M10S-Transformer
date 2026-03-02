@@ -1,0 +1,74 @@
+{
+  "89p_s11127_natural__holdout_10k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "89p_s11127_natural__holdout_50k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "89p_s118_star__holdout_10k": {
+    "acc": 0.9996,
+    "errors": 4
+  },
+  "89p_s118_star__holdout_50k": {
+    "acc": 0.9997,
+    "errors": 17
+  },
+  "122p_s42__holdout_10k": {
+    "acc": 0.9914,
+    "errors": 86
+  },
+  "122p_s42__holdout_50k": {
+    "acc": 0.9904,
+    "errors": 482
+  },
+  "122p_s0__holdout_10k": {
+    "acc": 0.9874,
+    "errors": 126
+  },
+  "122p_s0__holdout_50k": {
+    "acc": 0.9868,
+    "errors": 658
+  },
+  "83p_s905_targeted__holdout_10k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "83p_s905_targeted__holdout_50k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "86p_s1_targeted__holdout_10k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "86p_s1_targeted__holdout_50k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "101p_s13_targeted__holdout_10k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "101p_s13_targeted__holdout_50k": {
+    "acc": 1.0,
+    "errors": 0
+  },
+  "101p_s13_natural__holdout_10k": {
+    "acc": 0.9999,
+    "errors": 1
+  },
+  "101p_s13_natural__holdout_50k": {
+    "acc": 0.9999,
+    "errors": 7
+  },
+  "101p_s0_natural__holdout_10k": {
+    "acc": 0.8833,
+    "errors": 1167
+  },
+  "101p_s0_natural__holdout_50k": {
+    "acc": 0.8838,
+    "errors": 5810
+  }
+}

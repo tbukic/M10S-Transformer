@@ -1,0 +1,10 @@
+{
+  "tag": "qwen3_d3_ff6_173p",
+  "n_params": 173,
+  "seed": 1,
+  "best_acc": 1.0,
+  "final_acc": 1.0,
+  "final_digit_acc": 1.0,
+  "steps": 15000,
+  "elapsed": 123.56555700302124
+}

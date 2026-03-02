@@ -1,5 +1,8 @@
 """Evaluation metrics for addition models."""
 
-from minimal10digittransformer.evaluation.evaluator import evaluate_model
+from minimal10digittransformer.evaluation.metrics import (
+    evaluate,
+    evaluate_detailed,
+)
 
-__all__ = ["evaluate_model"]
+__all__ = ["evaluate", "evaluate_detailed"]

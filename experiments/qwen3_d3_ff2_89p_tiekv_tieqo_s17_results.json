@@ -1,0 +1,10 @@
+{
+  "tag": "qwen3_d3_ff2_89p_tiekv_tieqo",
+  "n_params": 89,
+  "seed": 17,
+  "best_acc": 0.005,
+  "final_acc": 0.001,
+  "final_digit_acc": 0.4681818181818182,
+  "steps": 50000,
+  "elapsed": 306.7519955635071
+}

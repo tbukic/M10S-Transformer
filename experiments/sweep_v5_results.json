@@ -1,0 +1,396 @@
+{
+  "seed_tournament": [
+    {
+      "name": "d7_v5_curriculum",
+      "seed": 1,
+      "n_params": 420,
+      "best_acc": 0.1067,
+      "best_epoch": 4500,
+      "best_sig": 2,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.1296709098599174,
+      "final_per_digit": [
+        0.10159999877214432,
+        0.0989999994635582,
+        0.10286000370979309,
+        0.09997999668121338,
+        0.09985999763011932,
+        0.08991999924182892,
+        0.09040000289678574,
+        0.09824000298976898,
+        0.10062000155448914,
+        0.09942000359296799,
+        0.4444800019264221
+      ],
+      "per_sig_results": {
+        "1": {
+          "exact_match": 0.1166,
+          "digit_accuracy_avg": 0.9187272753227841
+        },
+        "2": {
+          "exact_match": 0.0955,
+          "digit_accuracy_avg": 0.9176727255636995
+        },
+        "3": {
+          "exact_match": 0.0013,
+          "digit_accuracy_avg": 0.6011999994516373
+        },
+        "4": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.4190454530445012
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.3655000034381043
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.3506454513831572
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.3360454575581984
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.22997273233803836
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.1593272713097659
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.12749090858481146
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": {
+          "wall_time": 4389.03201007843,
+          "epochs": 5000,
+          "final_acc": 0.1067
+        }
+      },
+      "total_wall_time": 4389.032010793686,
+      "max_sig_reached": 2,
+      "curriculum": true
+    },
+    {
+      "name": "d7_v5_curriculum",
+      "seed": 3,
+      "n_params": 420,
+      "best_acc": 0.82,
+      "best_epoch": 1000,
+      "best_sig": 2,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.1356272744861516,
+      "final_per_digit": [
+        0.10468000173568726,
+        0.1003199964761734,
+        0.09827999770641327,
+        0.10029999911785126,
+        0.10012000054121017,
+        0.10050000250339508,
+        0.09774000197649002,
+        0.09756000339984894,
+        0.09786000102758408,
+        0.09736000001430511,
+        0.4971800148487091
+      ],
+      "per_sig_results": {
+        "1": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.8091363635083492
+        },
+        "2": {
+          "exact_match": 0.1015,
+          "digit_accuracy_avg": 0.8834727298129689
+        },
+        "3": {
+          "exact_match": 0.3857,
+          "digit_accuracy_avg": 0.9293454506180503
+        },
+        "4": {
+          "exact_match": 0.0038,
+          "digit_accuracy_avg": 0.6619181802326982
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.5127272721041333
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.44104545563459396
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.34037273038517346
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.2808636345646598
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.21805454858324744
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.13787272640249945
+        }
+      },
+      "curriculum_history": [
+        {
+          "epoch": 1000,
+          "from_sig": 2,
+          "to_sig": 3,
+          "accuracy": 0.82
+        }
+      ],
+      "level_times": {
+        "2": {
+          "wall_time": 879.0804750919342,
+          "epochs": 1000,
+          "final_acc": 0.82
+        },
+        "3": {
+          "wall_time": 3064.177299976349,
+          "epochs": 4000,
+          "final_acc": 0.82
+        }
+      },
+      "total_wall_time": 3943.258726835251,
+      "max_sig_reached": 3,
+      "curriculum": true
+    },
+    {
+      "name": "d7_v5_curriculum",
+      "seed": 4,
+      "n_params": 420,
+      "best_acc": 0.1112,
+      "best_epoch": 1000,
+      "best_sig": 2,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.13332545283165845,
+      "final_per_digit": [
+        0.09777999669313431,
+        0.09995999932289124,
+        0.09715999662876129,
+        0.10074000060558319,
+        0.09877999871969223,
+        0.10066000372171402,
+        0.09668000042438507,
+        0.08845999836921692,
+        0.08965999633073807,
+        0.09957999736070633,
+        0.4971199929714203
+      ],
+      "per_sig_results": {
+        "1": {
+          "exact_match": 0.0102,
+          "digit_accuracy_avg": 0.9083272739398208
+        },
+        "2": {
+          "exact_match": 0.2299,
+          "digit_accuracy_avg": 0.9295909093184904
+        },
+        "3": {
+          "exact_match": 0.0019,
+          "digit_accuracy_avg": 0.738545453006571
+        },
+        "4": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.6446454531767152
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.5512454563921149
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.4631454531442035
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.36525454304435034
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.2850999994711442
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.21389090879396958
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.1327545466748151
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": {
+          "wall_time": 2806.5360310077667,
+          "epochs": 5000,
+          "final_acc": 0.1112
+        }
+      },
+      "total_wall_time": 2806.5360317230225,
+      "max_sig_reached": 2,
+      "curriculum": true
+    },
+    {
+      "name": "d8_v5_curriculum",
+      "seed": 2,
+      "n_params": 528,
+      "best_acc": 0.0986,
+      "best_epoch": 3500,
+      "best_sig": 2,
+      "final_acc": 0.0,
+      "final_digit_acc": 0.1314927265048027,
+      "final_per_digit": [
+        0.100040003657341,
+        0.09978000074625015,
+        0.09917999804019928,
+        0.10091999918222427,
+        0.10062000155448914,
+        0.09967999905347824,
+        0.09978000074625015,
+        0.10057999938726425,
+        0.09898000210523605,
+        0.10113999992609024,
+        0.44571998715400696
+      ],
+      "per_sig_results": {
+        "1": {
+          "exact_match": 0.0742,
+          "digit_accuracy_avg": 0.8679181825030934
+        },
+        "2": {
+          "exact_match": 0.0956,
+          "digit_accuracy_avg": 0.9166909070177511
+        },
+        "3": {
+          "exact_match": 0.0014,
+          "digit_accuracy_avg": 0.7016636383804408
+        },
+        "4": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.5818636356429621
+        },
+        "5": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.48172726888548245
+        },
+        "6": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.3820181814107028
+        },
+        "7": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.3291636353189295
+        },
+        "8": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.29421818324110727
+        },
+        "9": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.2084636383435943
+        },
+        "10": {
+          "exact_match": 0.0,
+          "digit_accuracy_avg": 0.12972727147015659
+        }
+      },
+      "curriculum_history": [],
+      "level_times": {
+        "2": {
+          "wall_time": 2893.830224752426,
+          "epochs": 5000,
+          "final_acc": 0.0986
+        }
+      },
+      "total_wall_time": 2893.8302257061005,
+      "max_sig_reached": 2,
+      "curriculum": true
+    }
+  ],
+  "baseline": {
+    "name": "d16_v5_baseline_direct",
+    "seed": 0,
+    "n_params": 1824,
+    "best_acc": 0.0,
+    "best_epoch": 0,
+    "best_sig": 10,
+    "final_acc": 0.0,
+    "final_digit_acc": 0.263921818272634,
+    "final_per_digit": [
+      0.10134000331163406,
+      0.09991999715566635,
+      0.09948000311851501,
+      0.09973999857902527,
+      0.1025800034403801,
+      0.10047999769449234,
+      0.09923999756574631,
+      0.09914000332355499,
+      0.10121999680995941,
+      1.0,
+      1.0
+    ],
+    "per_sig_results": {
+      "1": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.190909091044556
+      },
+      "2": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.19948181780901822
+      },
+      "3": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.2086454541845755
+      },
+      "4": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.21881818161769348
+      },
+      "5": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.22754545509815216
+      },
+      "6": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.23622727326371454
+      },
+      "7": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.24557272615757855
+      },
+      "8": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.25539999997073953
+      },
+      "9": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.2637727267362855
+      },
+      "10": {
+        "exact_match": 0.0,
+        "digit_accuracy_avg": 0.2630363628268242
+      }
+    },
+    "curriculum_history": [],
+    "level_times": {
+      "10": {
+        "wall_time": 7499.682611465454,
+        "epochs": 10000,
+        "final_acc": 0.0
+      }
+    },
+    "total_wall_time": 7499.682612419128,
+    "max_sig_reached": 10,
+    "curriculum": false
+  }
+}

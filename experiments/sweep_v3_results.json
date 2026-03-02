@@ -1,0 +1,26 @@
+[
+  {
+    "name": "d6_fr_15rep",
+    "error": "name 'epochs_per_level' is not defined"
+  },
+  {
+    "name": "d6_fr_25rep",
+    "error": "name 'epochs_per_level' is not defined"
+  },
+  {
+    "name": "d6_fr_15rep_gelu",
+    "error": "name 'epochs_per_level' is not defined"
+  },
+  {
+    "name": "d4_fr_30rep",
+    "error": "name 'epochs_per_level' is not defined"
+  },
+  {
+    "name": "d8_noffn_20rep",
+    "error": "name 'epochs_per_level' is not defined"
+  },
+  {
+    "name": "d6_fr_15rep_abacus",
+    "error": "name 'epochs_per_level' is not defined"
+  }
+]

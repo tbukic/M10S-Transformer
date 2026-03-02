@@ -1,0 +1,302 @@
+[
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1341.0178081989288,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 7,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1388.9804728031158,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 3,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1391.3236863613129,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 6,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.1,
+    "final_acc": 0.0679,
+    "elapsed": 1391.8570337295532,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 4,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.85,
+    "final_acc": 0.8621,
+    "elapsed": 1393.93577170372,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 5,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1413.3361687660217,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 1,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1415.1362314224243,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 0,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1418.789006471634,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 2,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1323.6796703338623,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 9,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.585,
+    "final_acc": 0.638,
+    "elapsed": 1396.6336889266968,
+    "returncode": 0,
+    "name": "89p",
+    "seed": 8,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1367.8795793056488,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 2,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.015,
+    "final_acc": 0.0045,
+    "elapsed": 1376.5351197719574,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 1,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0002,
+    "elapsed": 1355.5128378868103,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 4,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 1.0,
+    "final_acc": 1.0,
+    "elapsed": 1388.4906389713287,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 0,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1376.9028067588806,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 3,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1397.3772175312042,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 5,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 1.0,
+    "final_acc": 1.0,
+    "elapsed": 1389.9176378250122,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 6,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.875,
+    "final_acc": 0.8951,
+    "elapsed": 1338.2769742012024,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 0,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.185,
+    "final_acc": 0.1526,
+    "elapsed": 1377.8876378536224,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 7,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1335.606704711914,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 2,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1359.3968408107758,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 3,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.09,
+    "final_acc": 0.0714,
+    "elapsed": 1402.292237520218,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 1,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 1.0,
+    "final_acc": 1.0,
+    "elapsed": 1422.3042986392975,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 8,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 1.0,
+    "final_acc": 1.0,
+    "elapsed": 1429.00927734375,
+    "returncode": 0,
+    "name": "122p",
+    "seed": 9,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1196.6956675052643,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 7,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.015,
+    "final_acc": 0.0096,
+    "elapsed": 1229.776188135147,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 4,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1228.1562683582306,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 5,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 1.0,
+    "final_acc": 0.9936,
+    "elapsed": 1223.7883396148682,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 6,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 1197.3341147899628,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 8,
+    "steps": 200000,
+    "stage": "fresh"
+  },
+  {
+    "best_acc": 0.21,
+    "final_acc": 0.203,
+    "elapsed": 1247.9210405349731,
+    "returncode": 0,
+    "name": "101p",
+    "seed": 9,
+    "steps": 200000,
+    "stage": "fresh"
+  }
+]

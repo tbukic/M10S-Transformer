@@ -1,0 +1,23 @@
+{
+  "d_model": 36,
+  "n_repeats": 15,
+  "n_heads": 2,
+  "n_params": 8424,
+  "seed": 0,
+  "best_acc": 1.0,
+  "best_epoch": 1000,
+  "final_acc": 1.0,
+  "final_per_digit": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ]
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "name": "89p",
+    "seed": 5,
+    "ft_seed": 105,
+    "best_acc": 0.875,
+    "final_acc": 0.9048,
+    "elapsed": 283.6028642654419,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_89p_tiekv_tieqo_s5/best.pt"
+  },
+  {
+    "name": "83p",
+    "seed": 8,
+    "ft_seed": 108,
+    "best_acc": 0.61,
+    "final_acc": 0.6276,
+    "elapsed": 298.9368395805359,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s8/best.pt"
+  },
+  {
+    "name": "83p",
+    "seed": 9,
+    "ft_seed": 109,
+    "best_acc": 0.74,
+    "final_acc": 0.7874,
+    "elapsed": 319.2999963760376,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s9/best.pt"
+  },
+  {
+    "name": "86p",
+    "seed": 5,
+    "ft_seed": 105,
+    "best_acc": 0.87,
+    "final_acc": 0.8777,
+    "elapsed": 329.0665376186371,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_86p_tiekv_tieqo_shbnorm_s5/best.pt"
+  },
+  {
+    "name": "83p",
+    "seed": 5,
+    "ft_seed": 105,
+    "best_acc": 0.97,
+    "final_acc": 0.9721,
+    "elapsed": 333.49098682403564,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s5/best.pt"
+  },
+  {
+    "name": "86p",
+    "seed": 1,
+    "ft_seed": 101,
+    "best_acc": 0.98,
+    "final_acc": 0.9909,
+    "elapsed": 334.36917757987976,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_86p_tiekv_tieqo_shbnorm_s1/best.pt"
+  },
+  {
+    "name": "89p",
+    "seed": 1,
+    "ft_seed": 101,
+    "best_acc": 0.545,
+    "final_acc": 0.5835,
+    "elapsed": 347.1933534145355,
+    "returncode": 0,
+    "stage": 2,
+    "checkpoint": "checkpoints/qwen3_d3_ff2_89p_tiekv_tieqo_s1/best.pt"
+  }
+]

@@ -20,7 +20,7 @@ ARG INCLUDE_PLAYWRIGHT_SYSTEM_DEPS="n"
 ARG INCLUDE_OCR_PDF_STACK="n"
 ARG INCLUDE_SAGEMATH="n"
 ARG INCLUDE_GITHUB_CLI="n"
-ARG INCLUDE_JEKYLL_LATEX="n"
+ARG INCLUDE_JEKYLL_LATEX="y"
 
 ARG INCLUDE_EXPO_TOOLCHAIN="n"
 ARG INCLUDE_VERCEL_CLI="n"
@@ -105,7 +105,8 @@ RUN set -eux; \
 RUN if [ "${INCLUDE_JEKYLL_LATEX}" = "y" ]; then \
       apt-get update -y; \
       apt-get install -y ruby-full zlib1g-dev texlive-latex-base texlive-latex-extra \
-        texlive-fonts-recommended texlive-fonts-extra texlive-xetex; \
+        texlive-fonts-recommended texlive-fonts-extra texlive-xetex texlive-science \
+        texlive-bibtex-extra biber latexmk; \
       rm -rf /var/lib/apt/lists/*; \
     fi
 

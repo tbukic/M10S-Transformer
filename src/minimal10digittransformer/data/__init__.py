@@ -1,6 +1,19 @@
-"""Data generation and tokenization for 10-digit addition."""
+"""Data generation for 10-digit addition."""
 
-from minimal10digittransformer.data.dataset import AdditionDataset, generate_addition_pair
-from minimal10digittransformer.data.tokenizer import AdditionTokenizer
+from minimal10digittransformer.data.addition import (
+    encode,
+    expected_output,
+    generate_batch,
+    generate_test_set,
+    save_test_set,
+    load_test_set,
+)
 
-__all__ = ["AdditionDataset", "AdditionTokenizer", "generate_addition_pair"]
+__all__ = [
+    "encode",
+    "expected_output",
+    "generate_batch",
+    "generate_test_set",
+    "save_test_set",
+    "load_test_set",
+]

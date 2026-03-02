@@ -1,0 +1,29 @@
+[
+  {
+    "config": "122p",
+    "seed": 0,
+    "n_params": 122,
+    "final_base": 1.0,
+    "final_ema": 0.9998,
+    "final_swa": 0.5914,
+    "csv_path": "plots/grokking_ablation/122p_s0/metrics.csv"
+  },
+  {
+    "config": "122p",
+    "seed": 3,
+    "n_params": 122,
+    "final_base": 0.8056,
+    "final_ema": 0.8015,
+    "final_swa": 0.0,
+    "csv_path": "plots/grokking_ablation/122p_s3/metrics.csv"
+  },
+  {
+    "config": "122p",
+    "seed": 6,
+    "n_params": 122,
+    "final_base": 0.0008,
+    "final_ema": 0.0008,
+    "final_swa": 0.0,
+    "csv_path": "plots/grokking_ablation/122p_s6/metrics.csv"
+  }
+]

@@ -24,9 +24,6 @@ dev = [
   "ipykernel>=6.29.0",
 ]
 
-[project.scripts]
-minimal10digittransformer = "minimal10digittransformer.__main__:main"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

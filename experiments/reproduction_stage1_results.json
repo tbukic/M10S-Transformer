@@ -1,0 +1,452 @@
+[
+  {
+    "name": "89p",
+    "seed": 6,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 334.9838902950287,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 2,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 354.733598947525,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 7,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 355.3831903934479,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 1,
+    "steps": 50000,
+    "best_acc": 0.435,
+    "final_acc": 0.4892,
+    "elapsed": 359.69214367866516,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 4,
+    "steps": 50000,
+    "best_acc": 0.025,
+    "final_acc": 0.0212,
+    "elapsed": 360.2108738422394,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 5,
+    "steps": 50000,
+    "best_acc": 0.81,
+    "final_acc": 0.8492,
+    "elapsed": 360.9372618198395,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 0,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 362.6947901248932,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 3,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 364.19206285476685,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 8,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 368.61025977134705,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "122p",
+    "seed": 0,
+    "steps": 50000,
+    "best_acc": 1.0,
+    "final_acc": 0.9998,
+    "elapsed": 362.6955041885376,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "122p",
+    "seed": 2,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 361.5864989757538,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "89p",
+    "seed": 9,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 370.3920052051544,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "101p",
+    "seed": 0,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0006,
+    "elapsed": 369.51935148239136,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "122p",
+    "seed": 3,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 374.5839922428131,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "122p",
+    "seed": 4,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 379.5499348640442,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "122p",
+    "seed": 1,
+    "steps": 50000,
+    "best_acc": 0.83,
+    "final_acc": 0.8442,
+    "elapsed": 389.89755368232727,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "101p",
+    "seed": 1,
+    "steps": 50000,
+    "best_acc": 0.005,
+    "final_acc": 0.0024,
+    "elapsed": 364.0695025920868,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "101p",
+    "seed": 2,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 363.9851713180542,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "101p",
+    "seed": 3,
+    "steps": 50000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 370.12890434265137,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "101p",
+    "seed": 4,
+    "steps": 50000,
+    "best_acc": 0.085,
+    "final_acc": 0.0748,
+    "elapsed": 380.2634057998657,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 3,
+    "steps": 100000,
+    "best_acc": 0.005,
+    "final_acc": 0.0005,
+    "elapsed": 663.9054808616638,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 2,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 689.8207852840424,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 0,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 719.4398889541626,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 1,
+    "steps": 100000,
+    "best_acc": 0.98,
+    "final_acc": 0.987,
+    "elapsed": 731.9508650302887,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 4,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 692.4942631721497,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 5,
+    "steps": 100000,
+    "best_acc": 0.82,
+    "final_acc": 0.844,
+    "elapsed": 704.0983715057373,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 6,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 722.4344527721405,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 7,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 715.8670785427094,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 8,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 720.4971833229065,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "86p",
+    "seed": 9,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 711.5831906795502,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 0,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 693.9866256713867,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 1,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0001,
+    "elapsed": 696.087388753891,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 3,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 689.9519395828247,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 4,
+    "steps": 100000,
+    "best_acc": 0.01,
+    "final_acc": 0.0091,
+    "elapsed": 691.2146396636963,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 2,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 750.6184899806976,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 5,
+    "steps": 100000,
+    "best_acc": 0.94,
+    "final_acc": 0.956,
+    "elapsed": 739.3179967403412,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 6,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 716.1490471363068,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 7,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 713.2473769187927,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 9,
+    "steps": 100000,
+    "best_acc": 0.71,
+    "final_acc": 0.735,
+    "elapsed": 723.7109935283661,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 8,
+    "steps": 100000,
+    "best_acc": 0.525,
+    "final_acc": 0.5102,
+    "elapsed": 743.5024664402008,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 10,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 693.5414497852325,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 12,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0,
+    "elapsed": 665.3008806705475,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 11,
+    "steps": 100000,
+    "best_acc": 0.0,
+    "final_acc": 0.0003,
+    "elapsed": 670.6142184734344,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 13,
+    "steps": 100000,
+    "best_acc": 0.02,
+    "final_acc": 0.0075,
+    "elapsed": 630.7472207546234,
+    "returncode": 0,
+    "stage": 1
+  },
+  {
+    "name": "83p",
+    "seed": 14,
+    "steps": 100000,
+    "best_acc": 0.06,
+    "final_acc": 0.0426,
+    "elapsed": 565.1357343196869,
+    "returncode": 0,
+    "stage": 1
+  }
+]

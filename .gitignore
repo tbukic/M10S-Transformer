@@ -43,6 +43,19 @@
 !reports/**/*.tex
 !reports/**/*.bib
 
+# Paper
+!paper/
+!paper/**/
+!paper/**/*.tex
+!paper/**/*.bib
+!paper/**/*.bst
+!paper/**/*.sty
+!paper/**/*.cls
+!paper/**/*.pdf
+!paper/**/*.png
+!paper/**/*.jpg
+!paper/**/Makefile
+
 # Experiments
 !experiments/
 !experiments/**/
@@ -56,5 +69,17 @@
 !configs/**/*.json
 !configs/**/*.yaml
 
+# Scripts
+!scripts/
+!scripts/**/
+!scripts/**/*.py
+
+# Data (test sets)
+!data/
+!data/**/*.json
+
 # Task description
 !TASK.md
+
+# Review
+!review.md
