@@ -407,6 +407,37 @@ Params & Model & Holdout 10K & Holdout 50K \\
 \end{tabular}
 \end{table}
 
+\textbf{Official AdderBoard verification.}
+All five best-per-parameter models were evaluated using the official
+AdderBoard \texttt{verify.py} script \citep{adderboard2025}, which tests
+10,000 random pairs (seed=2025) plus 10 edge cases (10,010 total).
+Results: \textbf{all five models achieve 10,010/10,010 correct (100.00\%)}
+and receive QUALIFIED status.
+Table~\ref{tab:verify} shows the official results that would place our
+83-parameter model at \textbf{\#1 on the trained-weights leaderboard},
+ahead of the current leader at 311 parameters.
+
+\begin{table}[t]
+\centering
+\caption{Official AdderBoard verification (\texttt{verify.py}, seed=2025,
+10,010 tests = 10K random + 10 edge cases). All models achieve 100\%
+accuracy and QUALIFIED status ($\geq$99\% threshold).}
+\label{tab:verify}
+\vspace{4pt}
+\small
+\begin{tabular}{@{}rlccc@{}}
+\toprule
+Params & Model & Correct & Accuracy & Status \\
+\midrule
+83  & s905 (targeted)  & 10,010/10,010 & 100.00\% & QUALIFIED \\
+86  & s1 (targeted)    & 10,010/10,010 & 100.00\% & QUALIFIED \\
+89  & s11127 (natural) & 10,010/10,010 & 100.00\% & QUALIFIED \\
+101 & s13 (targeted)   & 10,010/10,010 & 100.00\% & QUALIFIED \\
+122 & s6 (natural)     & 10,010/10,010 & 100.00\% & QUALIFIED \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Ablation study}
 
 Table~\ref{tab:ablation} presents an ablation study over architectural

@@ -213,6 +213,22 @@ To address concerns about test-set contamination (checkpoint selection using the
 
 5. **Original vs holdout results are highly consistent.** For all models, the holdout error counts closely match the original test set counts, demonstrating that our evaluation methodology is sound.
 
+## Official AdderBoard Verification
+
+All five best-per-parameter models were evaluated using the official AdderBoard `verify.py` script (seed=2025, 10,000 random pairs + 10 edge cases = 10,010 total tests):
+
+| Model | Params | Correct | Accuracy | Status |
+|-------|--------|---------|----------|--------|
+| **83p s905 (targeted)** | **83** | **10,010/10,010** | **100.00%** | **QUALIFIED** |
+| **86p s1 (targeted)** | **86** | **10,010/10,010** | **100.00%** | **QUALIFIED** |
+| **89p s11127 (natural)** | **89** | **10,010/10,010** | **100.00%** | **QUALIFIED** |
+| **101p s13 (targeted)** | **101** | **10,010/10,010** | **100.00%** | **QUALIFIED** |
+| **122p s6 (natural)** | **122** | **10,010/10,010** | **100.00%** | **QUALIFIED** |
+
+All models achieve perfect accuracy on the official test, including all 10 edge cases (0+0, 9999999999+9999999999, etc.). The 83p model would rank **#1 on the AdderBoard trained-weights leaderboard**, ahead of the current leader at 311 parameters.
+
+Verification outputs saved in `submissions/verify_output_{83,86,89,101,122}p.txt`.
+
 ---
 
 ## Reproduction Study
@@ -359,20 +375,21 @@ The 4-stage pipeline that produced the 100% 89p model:
 
 **Note**: Leaderboard last updated Feb 26. Massive submission backlog (issues #27–#56).
 
-**Our submissions (not yet on leaderboard):**
+**Our submissions (verified via official `verify.py`, seed=2025, 10,010 tests):**
 
-| Params | Accuracy | Architecture | vs. Leaderboard |
-|--------|----------|--------------|-----------------|
-| **83** | **100.00%** | Qwen3 1h, tieKV+tieQO+shnorm, iterated targeted | **#1 — smallest trained model at 100%, 0 errors on 50K** |
-| **86** | **100.00%** | Qwen3 1h, tieKV+tieQO+shbnorm, L-BFGS→targeted | 0 errors on 50K |
-| **89** | **100.00%** | Qwen3 1h, tieKV+tieQO, 4-stage natural FT | 0 errors on 50K (no targeting needed!) |
-| **122** | **100.00%** | Qwen3 1h, ff=3 | 0 errors on 10K |
+| Params | verify.py | Architecture | vs. Leaderboard |
+|--------|-----------|--------------|-----------------|
+| **83** | **10,010/10,010 (100.00%) QUALIFIED** | Qwen3 1h, tieKV+tieQO+shnorm, iterated targeted | **#1 — smallest trained model** |
+| **86** | **10,010/10,010 (100.00%) QUALIFIED** | Qwen3 1h, tieKV+tieQO+shbnorm, L-BFGS→targeted | |
+| **89** | **10,010/10,010 (100.00%) QUALIFIED** | Qwen3 1h, tieKV+tieQO, 4-stage natural FT | No test-set intervention |
+| **101** | **10,010/10,010 (100.00%) QUALIFIED** | Qwen3 1h, tieQO, targeted FT | |
+| **122** | **10,010/10,010 (100.00%) QUALIFIED** | Qwen3 1h, ff=3, 200K cosine | |
 
 ### Pending Submissions — Key Threats
 
 | Author | Params | Accuracy | Status | Notes |
 |--------|--------|----------|--------|-------|
-| **evindor** | **75 trained** | **100%** | Pending (#50) | Split-subspace attention, d=5, parametric embeddings. <10% seed grok rate. Would beat our 86p. |
+| **evindor** | **67 trained** | **100%** | Pending (#50) | Parametric circular embed, rank-1 output, carry-mix curriculum (80%). Would beat our 83p if accepted. |
 | staghado | 122 | 99.95% | Pending (#51) | **Same Qwen3 architecture as ours** (d=3, 1h/1kv, hd=4, ff=3, RoPE theta=3). Confirms reproducibility. |
 | fblissjr | 162 | 100% | Pending (#55) | Hybrid: hand-coded attention mask + 162 trained weights |
 | Deferf | 37 | 100% | Pending (#56) | **SUSPICIOUS**: verify.py output shows 95,396 params; describes itself as "Hardcoded Pair-Token Adder" |
