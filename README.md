@@ -6,8 +6,6 @@ A single-layer transformer with **83 trained parameters** achieves **100% accura
 
 ## Key Results
 
-| Model | Params | 10K Accuracy | 50K Accuracy | Method |
-|-------|--------|-------------|-------------|--------|
 | Model | Params | verify.py | 50K Holdout | Method |
 |-------|--------|-----------|------------|--------|
 | 83p (tieKV+tieQO+shnorm) | **83** | **10,010/10,010 (100%)** | 0 err | Iterated targeted FT |
