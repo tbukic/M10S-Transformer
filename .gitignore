@@ -69,6 +69,19 @@
 !configs/**/*.json
 !configs/**/*.yaml
 
+# Checkpoints — best-per-param only (~30KB total)
+!checkpoints/
+!checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s905_targeted/
+!checkpoints/qwen3_d3_ff2_83p_tiekv_tieqo_shnorm_s905_targeted/*
+!checkpoints/qwen3_d3_ff2_86p_tiekv_tieqo_shbnorm_s1_targeted/
+!checkpoints/qwen3_d3_ff2_86p_tiekv_tieqo_shbnorm_s1_targeted/*
+!checkpoints/qwen3_d3_ff2_89p_tiekv_tieqo_s11127/
+!checkpoints/qwen3_d3_ff2_89p_tiekv_tieqo_s11127/*
+!checkpoints/qwen3_d3_ff2_101p_tieqo_s13_targeted/
+!checkpoints/qwen3_d3_ff2_101p_tieqo_s13_targeted/*
+!checkpoints/qwen3_d3_ff3_122p_s6/
+!checkpoints/qwen3_d3_ff3_122p_s6/*
+
 # Scripts
 !scripts/
 !scripts/**/
@@ -80,6 +93,3 @@
 
 # Task description
 !TASK.md
-
-# Review
-!review.md

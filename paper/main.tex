@@ -86,7 +86,7 @@ early work showed that standard transformers struggle with multi-digit
 arithmetic \citep{nogueira2021investigating}, and subsequent studies have
 explored various architectural and training modifications to improve
 performance \citep{lee2024teaching, mcleish2024transformers,
-jelassi2023length, zhou2024what, shoenfield2024reverse}.
+jelassi2023length, zhou2024what, zhangli2024reverse}.
 
 A separate line of work on \emph{grokking}---the phenomenon where models
 suddenly generalize long after memorizing training data---has shown that
@@ -173,7 +173,7 @@ All models use a single-layer transformer in the Qwen3 style
 The LSB-first encoding is critical: it aligns carry propagation
 (low-to-high) with the autoregressive generation direction
 (left-to-right), so the model can compute each output digit using only
-previously-generated digits and carries \citep{shoenfield2024reverse}.
+previously-generated digits and carries \citep{zhangli2024reverse}.
 
 \subsection{Weight tying}
 
@@ -781,7 +781,7 @@ prevents direct application to longer inputs.
 \textbf{Arithmetic transformers.} \citet{nogueira2021investigating}
 established that standard transformers struggle with multi-digit
 arithmetic, prompting various solutions: reversed digit order
-\citep{shoenfield2024reverse}, specialized positional encodings
+\citep{zhangli2024reverse}, specialized positional encodings
 \citep{mcleish2024transformers}, curriculum learning
 \citep{lee2024teaching}, and length generalization techniques
 \citep{jelassi2023length, zhou2024what}. Our work focuses on a
