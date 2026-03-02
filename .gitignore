@@ -62,6 +62,8 @@
 !experiments/**/*.py
 !experiments/**/*.json
 !experiments/**/*.yaml
+# Archive — old experiments, not needed for reproduction
+experiments/archive/
 
 # Configs
 !configs/
