@@ -93,5 +93,14 @@ experiments/archive/
 !data/
 !data/**/*.json
 
+# Submissions (AdderBoard)
+!submissions/
+!submissions/**/*.py
+!submissions/**/*.md
+!submissions/**/*.txt
+
+# AdderBoard verify.py
+!verify.py
+
 # Task description
 !TASK.md

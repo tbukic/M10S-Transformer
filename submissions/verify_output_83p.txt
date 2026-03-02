@@ -1,0 +1,20 @@
+Model: M10S-83p
+Author: Tom Bukic
+Parameters (unique): 83
+Architecture: 1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
+Tricks: Tied embeddings, Tied K=V, Tied O=Q^T, Shared all RMSNorms, RoPE (zero params), QK norms, Iterated targeted fine-tuning
+
+  Progress: 1000/10010 (1000/1000 correct) [3.1s]
+  Progress: 2000/10010 (2000/2000 correct) [6.1s]
+  Progress: 3000/10010 (3000/3000 correct) [9.0s]
+  Progress: 4000/10010 (4000/4000 correct) [12.0s]
+  Progress: 5000/10010 (5000/5000 correct) [15.1s]
+  Progress: 6000/10010 (6000/6000 correct) [18.1s]
+  Progress: 7000/10010 (7000/7000 correct) [21.1s]
+  Progress: 8000/10010 (8000/8000 correct) [24.1s]
+  Progress: 9000/10010 (9000/9000 correct) [27.1s]
+  Progress: 10000/10010 (10000/10000 correct) [30.1s]
+
+Results: 10010/10010 correct (100.00%)
+Time: 30.1s (333 additions/sec)
+Status: QUALIFIED (threshold: 99%)

@@ -1,0 +1,20 @@
+Model: M10S-89p
+Author: Tom Bukic
+Parameters (unique): 89
+Architecture: 1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
+Tricks: Tied embeddings, Tied K=V, Tied O=Q^T, RoPE (zero params), QK norms, 4-stage natural fine-tuning (no test-set intervention)
+
+  Progress: 1000/10010 (1000/1000 correct) [3.0s]
+  Progress: 2000/10010 (2000/2000 correct) [5.9s]
+  Progress: 3000/10010 (3000/3000 correct) [8.9s]
+  Progress: 4000/10010 (4000/4000 correct) [11.8s]
+  Progress: 5000/10010 (5000/5000 correct) [14.8s]
+  Progress: 6000/10010 (6000/6000 correct) [17.8s]
+  Progress: 7000/10010 (7000/7000 correct) [20.7s]
+  Progress: 8000/10010 (8000/8000 correct) [23.7s]
+  Progress: 9000/10010 (9000/9000 correct) [26.7s]
+  Progress: 10000/10010 (10000/10000 correct) [29.7s]
+
+Results: 10010/10010 correct (100.00%)
+Time: 29.7s (337 additions/sec)
+Status: QUALIFIED (threshold: 99%)
