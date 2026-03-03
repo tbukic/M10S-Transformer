@@ -4,7 +4,6 @@
 Tied K=V, Tied O=Q^T, shared all RMSNorms, iterated targeted fine-tuning.
 """
 
-import os
 from pathlib import Path
 
 import torch
