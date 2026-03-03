@@ -16,6 +16,12 @@ from minimal10digittransformer.model.qwen3 import (
     OUTPUT_LEN,
     TOTAL_LEN,
 )
+from minimal10digittransformer.model.circular_arc import CircularArcQwen3
+from minimal10digittransformer.model.rank1_out import (
+    Rank1OutModel,
+    Rank1OutAttention,
+    Rank1OutBlock,
+)
 
 __all__ = [
     "Qwen3AdditionModel",
@@ -32,4 +38,8 @@ __all__ = [
     "INPUT_LEN",
     "OUTPUT_LEN",
     "TOTAL_LEN",
+    "CircularArcQwen3",
+    "Rank1OutModel",
+    "Rank1OutAttention",
+    "Rank1OutBlock",
 ]
