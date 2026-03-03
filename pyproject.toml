@@ -1,7 +1,7 @@
 [project]
 name = "Minimal10DigitTransformer"
 version = "0.1.0"
-description = "A minimal transformer for 10-digit recognition with NVIDIA GPU support"
+description = "A minimal transformer for 10-digit addition (CPU-only training)"
 readme = "README.md"
 requires-python = ">=3.13"
 authors = [

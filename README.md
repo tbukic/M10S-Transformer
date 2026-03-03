@@ -9,10 +9,10 @@ A single-layer transformer with **83 trained parameters** achieves **100% accura
 | Model | Params | verify.py | 50K Holdout | Method |
 |-------|--------|-----------|------------|--------|
 | 83p (tieKV+tieQO+shnorm) | **83** | **10,010/10,010 (100%)** | 0 err | Iterated targeted FT |
-| 86p (tieKV+tieQO+shbnorm) | 86 | **10,010/10,010 (100%)** | 0 err | Single-shot targeted FT |
+| 86p (tieKV+tieQO+shbnorm) | 86 | **10,010/10,010 (100%)** | 0 err | L-BFGS + targeted FT |
 | 89p (tieKV+tieQO) | **89** | **10,010/10,010 (100%)** | 0 err | Multi-stage FT (natural, no targeting) |
 | 101p (tieQO) | 101 | **10,010/10,010 (100%)** | 0 err | Targeted FT |
-| 122p (base) | 122 | **10,010/10,010 (100%)** | 0 err | Cosine LR |
+| 122p (base) | 122 | **10,010/10,010 (100%)** | 1 err | Cosine LR |
 
 All 5 models achieve **QUALIFIED** status on the official [AdderBoard](https://github.com/anadim/AdderBoard) `verify.py` (seed=2025, 10K random + 10 edge cases). The 83p model would rank **#1 on the trained-weights leaderboard** (current leader: 311 params). Results also verified on independent 50K held-out test set (seed=99, zero overlap with training data).
 
