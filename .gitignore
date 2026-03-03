@@ -83,6 +83,12 @@ experiments/archive/
 !checkpoints/qwen3_d3_ff2_101p_tieqo_s13_targeted/*
 !checkpoints/qwen3_d3_ff3_122p_s6/
 !checkpoints/qwen3_d3_ff3_122p_s6/*
+!checkpoints/qwen3_arc_62p_tiekv_tieqo_adam_nowd/
+!checkpoints/qwen3_arc_62p_tiekv_tieqo_adam_nowd/*
+!checkpoints/qwen3_arc_95p_ft_s9999/
+!checkpoints/qwen3_arc_95p_ft_s9999/*
+!checkpoints/qwen3_rank1_96p_tiekv_s9999/
+!checkpoints/qwen3_rank1_96p_tiekv_s9999/*
 
 # Scripts
 !scripts/
