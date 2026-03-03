@@ -1,0 +1,20 @@
+Model: M10S-62p
+Author: Tom Bukic
+Parameters (unique): 62
+Architecture: 1L Qwen3 + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, tieKV+tieQO, RoPE theta=3, SwiGLU
+Tricks: Circular arc embedding (3 params instead of 30), Tied K=V projections (share key/value weights), Tied Q=O projections (output = Q transposed), Tied lm_head to dynamic embedding table, RoPE (zero params), QK norms, 4-stage training: cosine→AdamW→AdamW→Adam(no wd) cosine
+
+  Progress: 1000/10010 (1000/1000 correct) [3.5s]
+  Progress: 2000/10010 (2000/2000 correct) [6.8s]
+  Progress: 3000/10010 (3000/3000 correct) [10.1s]
+  Progress: 4000/10010 (4000/4000 correct) [13.4s]
+  Progress: 5000/10010 (5000/5000 correct) [16.6s]
+  Progress: 6000/10010 (6000/6000 correct) [19.9s]
+  Progress: 7000/10010 (7000/7000 correct) [23.2s]
+  Progress: 8000/10010 (8000/8000 correct) [26.4s]
+  Progress: 9000/10010 (9000/9000 correct) [29.7s]
+  Progress: 10000/10010 (10000/10000 correct) [33.0s]
+
+Results: 10010/10010 correct (100.00%)
+Time: 33.0s (303 additions/sec)
+Status: QUALIFIED (threshold: 99%)
