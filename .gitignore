@@ -96,7 +96,6 @@ experiments/archive/
 # Submissions (AdderBoard)
 !submissions/
 !submissions/**/*.py
-!submissions/**/*.md
 !submissions/**/*.txt
 
 # AdderBoard verify.py
