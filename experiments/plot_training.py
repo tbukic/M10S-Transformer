@@ -31,20 +31,32 @@ except ImportError:
 
 
 def load_metrics_csv(path):
-    """Load a metrics.csv file into lists."""
-    steps, losses, accs = [], [], []
+    """Load a metrics.csv file into lists.
+
+    Supports both old format (step column) and new reproduce.py format
+    (global_step column with phase tracking).
+    """
+    losses, accs, lrs = [], [], []
     with open(path) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            step = int(row["step"])
-            loss = float(row["loss"]) if row["loss"] else None
+            # Support both old ("step") and new ("global_step") formats
+            if "global_step" in row:
+                step = int(row["global_step"])
+            elif "step" in row:
+                step = int(row["step"])
+            else:
+                continue
+            loss = float(row["loss"]) if row.get("loss") and row["loss"] else None
             acc = float(row["exact_acc"]) if row.get("exact_acc") and row["exact_acc"] else None
-            steps.append(step)
+            lr = float(row["lr"]) if row.get("lr") and row["lr"] else None
             if loss is not None:
                 losses.append((step, loss))
             if acc is not None:
                 accs.append((step, acc))
-    return losses, accs
+            if lr is not None:
+                lrs.append((step, lr))
+    return losses, accs, lrs
 
 
 def find_all_metrics():
@@ -104,7 +116,7 @@ def plot_grokking_curves(metrics_dict, output_dir="plots"):
         fig.suptitle(f"{n_params}p Grokking Dynamics", fontsize=14)
 
         for tag, path in configs[n_params]:
-            losses, accs = load_metrics_csv(path)
+            losses, accs, _lrs = load_metrics_csv(path)
             seed = tag.split("_s")[-1]
 
             if losses:
