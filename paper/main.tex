@@ -318,22 +318,34 @@ refinement.
 
 \subsection{Train/test separation}
 
-No data leakage occurs between training and evaluation. The test set
-is generated with a separate RNG instance (\texttt{random.Random(42)}),
-saved to disk, and never enters the training loop. Training data is
-generated on-the-fly from a per-run seeded RNG. The input space is
-$[0, 10^{10}-1]^2 = 10^{20}$ pairs. With $\sim$6.4M training samples
-(50K steps $\times$ 128 batch), the expected overlap with a 10K test set
-is $10^4 \times 6.4 \times 10^6 / 10^{20} \approx 6 \times 10^{-10}$---effectively zero.
+We use three evaluation sets, generated with different RNG seeds and
+mutually disjoint:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Evaluation set} (seed=42): 10K and 50K pairs used for
+    checkpoint selection (200-sample subset) and final accuracy reporting
+    (Tables~\ref{tab:main},~\ref{tab:targeted}). Targeted fine-tuning
+    (Section~\ref{sec:targeted}) draws error pairs from this set.
+  \item \textbf{Holdout set} (seed=123 for 10K, seed=99 for 50K): never
+    used during training, checkpoint selection, or targeting. Validates
+    that targeted models genuinely generalize
+    (Table~\ref{tab:holdout}).
+  \item \textbf{Verification set} (seed=2025): the official AdderBoard
+    \texttt{verify.py} test of 10,010 pairs. External to our pipeline
+    (Table~\ref{tab:verify}).
+\end{itemize}
+
+Training data is generated on-the-fly from a per-run seeded RNG. The
+input space is $[0, 10^{10}-1]^2 = 10^{20}$ pairs. With $\sim$6.4M
+training samples (50K steps $\times$ 128 batch), the expected overlap
+with any 10K set is $10^4 \times 6.4 \times 10^6 / 10^{20} \approx
+6 \times 10^{-10}$---effectively zero.
 
 \textbf{Checkpoint selection.} During training, we evaluate on 200
-samples drawn from the test set to select the best checkpoint. While
-this introduces a mild dependence on the test distribution, it is
-standard practice in grokking research where validation sets would
-require additional data budget. We note this as a methodological
-limitation: the reported checkpoint is the one that maximized accuracy on
-a 200-sample subset of the test set used for final evaluation. Our main
-results are further validated on a separate 50K test set.
+samples from the evaluation set to select the best checkpoint. This
+introduces a mild dependence on the evaluation distribution, which is
+standard practice in grokking research. We note this as a methodological
+limitation and validate all key results on the holdout set.
 
 % ══════════════════════════════════════════════════════════════════════════
 \section{Results}
@@ -349,8 +361,8 @@ Section~\ref{sec:targeted}).
 
 \begin{table}[t]
 \centering
-\caption{Main results on the fixed 10K and 50K test sets. ``Natural''
-models are trained without any test-set-derived information in the
+\caption{Main results on the evaluation set. ``Natural''
+models are trained without any evaluation-set-derived information in the
 training data. ``Targeted'' models include identified error pairs in
 fine-tuning batches (Section~\ref{sec:targeted}). All models use the
 architecture described in Section~\ref{sec:arch}.}
@@ -377,19 +389,18 @@ Params & Model & Method & 10K Acc & 50K Acc \\
 \end{table}
 
 \textbf{The 89p s11127 result is fully clean:} it reaches 0 errors on
-50K samples through a natural 4-stage fine-tuning pipeline with no
-test-set intervention beyond checkpoint selection.
+50K evaluation-set samples through a natural 4-stage fine-tuning pipeline
+with no intervention beyond checkpoint selection.
 
 \textbf{The 83p and 86p results use targeted fine-tuning} (Section~\ref{sec:targeted}),
-which includes test-set error pairs in training data. However, as shown
-in Table~\ref{tab:holdout}, all models achieve identical results on
-completely independent held-out data, confirming genuine generalization.
+which includes evaluation-set error pairs in training data. However,
+all targeted models maintain their accuracy on the holdout set
+(Table~\ref{tab:holdout}).
 
 \begin{table}[t]
 \centering
-\caption{Independent held-out evaluation. Test sets generated with
-separate seeds (10K: seed=123, 50K: seed=99), zero overlap with any
-training or original evaluation data.}
+\caption{Results on the holdout set (10K: seed=123, 50K: seed=99),
+disjoint from training and the evaluation set.}
 \label{tab:holdout}
 \vspace{4pt}
 \small
@@ -486,7 +497,7 @@ GELU (no gate)         & varies & 3/3 & $\sim$99.9\% & SwiGLU outperforms \\
 \subsection{Detailed error analysis}
 
 Among the 73 evaluated 89-parameter seeds, the distribution of errors on
-the 10K test set is:
+the 10K evaluation set is:
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
   \item 1 seed with 0 errors (s11127, 4-stage pipeline)
@@ -583,9 +594,9 @@ architectural failure---it is a razor-thin decision boundary that the
 % ══════════════════════════════════════════════════════════════════════════
 
 \textbf{Important methodological note.} Targeted fine-tuning uses
-error pairs identified from the test set as additional training data.
-This constitutes a form of test-set leakage: the model is directly
-trained on inputs that were incorrectly predicted during evaluation.
+error pairs identified from the evaluation set as additional training
+data. The model is directly trained on inputs it previously predicted
+incorrectly.
 We present these results separately from natural results
 (Table~\ref{tab:main}) and emphasize that the 89p~s11127 natural result
 is our primary claim. Targeted fine-tuning results demonstrate
@@ -599,7 +610,7 @@ from input patterns that are astronomically rare in random training
 batches. Targeted fine-tuning forces the model to see these patterns:
 
 \begin{enumerate}[leftmargin=*, itemsep=2pt]
-  \item Evaluate the model on the fixed test set.
+  \item Evaluate the model on the evaluation set.
   \item Collect all error pairs $(a, b)$.
   \item Train with batches comprising $\sim$227 random pairs plus all
     error pairs ($\sim$256 total).
@@ -616,7 +627,8 @@ This is a form of online hard example mining
 \centering
 \caption{Targeted fine-tuning results. The 83p model requires iterated
 targeting (find errors, fix, find new errors, repeat) while 86p and 89p
-converge in a single round. All targeted models achieve 100\% on 10K.}
+converge in a single round. All targeted models achieve 100\% on the
+evaluation set.}
 \label{tab:targeted}
 \vspace{4pt}
 \begin{tabular}{@{}rccccc@{}}
@@ -770,7 +782,7 @@ Params & Author & Accuracy & Architecture & Key technique \\
 \end{tabular}
 
 \smallskip
-{\footnotesize $^\dagger$Uses targeted fine-tuning with test-set error pairs (Section~\ref{sec:targeted}).
+{\footnotesize $^\dagger$Uses targeted fine-tuning with evaluation-set error pairs (Section~\ref{sec:targeted}).
 All ``Ours'' results verified at 100.00\% on official \texttt{verify.py} (10,010/10,010).}
 \end{table}
 
@@ -794,22 +806,19 @@ escape---also directly inspired our L-BFGS experiments
 % ══════════════════════════════════════════════════════════════════════════
 
 \textbf{Checkpoint selection.} Best checkpoints are selected using
-200-sample evaluations drawn from the test set during training. While
-standard in grokking research, this creates a dependence between
-checkpoint selection and final evaluation. To validate that this does not
-introduce selection bias, we evaluated all key models on
-\emph{completely independent} held-out test sets (10K with seed=123,
-50K with seed=99, zero overlap with training or original test data).
-Results are highly consistent: 89p s11127 achieves 0 errors on
-held-out 50K, and all targeted models also achieve 0 errors on
-held-out data (Table~\ref{tab:holdout}).
+200-sample evaluations from the evaluation set during training. This
+creates a dependence between checkpoint selection and final evaluation
+on the same set. Results on the holdout set
+(Table~\ref{tab:holdout}) confirm that selection bias is negligible:
+89p s11127 achieves 0 errors on holdout 50K, and all targeted models
+also achieve 0 errors.
 
 \textbf{Targeted fine-tuning.} The 83p and 86p 100\% results use
-test-set errors as training data. However, evaluation on independent
-held-out data (never seen during training or targeting) confirms these
-models achieve 0 errors, demonstrating genuine generalization rather
-than memorization of test pairs. The 89p s11127 natural result remains
-our primary claim for clean, unassisted 100\% accuracy.
+evaluation-set errors as training data. However, these models achieve
+0 errors on the holdout set (Table~\ref{tab:holdout}), confirming
+generalization rather than memorization of targeted pairs. The
+89p s11127 natural result remains our primary claim for unassisted
+100\% accuracy.
 
 \textbf{Seed sensitivity.} All sub-100-parameter results are highly
 seed-dependent. At 89p, only 1 of 24 fourth-stage seeds achieves 0
