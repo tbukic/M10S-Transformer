@@ -13,7 +13,7 @@
 
 **Method:** 4-stage training with circular arc embedding + Adam (no weight decay)
 
-**Architecture:** 1L Qwen3 decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
+**Architecture:** 1L decoder-only transformer decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
 
 **Key Tricks:**
 - Circular arc embedding (3 learnable params instead of 30 for lookup table)
@@ -31,7 +31,7 @@
 Model: M10S-62p
 Author: Tom Bukic
 Parameters (unique): 62
-Architecture: 1L Qwen3 + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, tieKV+tieQO, RoPE theta=3, SwiGLU
+Architecture: 1L decoder-only transformer + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, tieKV+tieQO, RoPE theta=3, SwiGLU
 Tricks: Circular arc embedding (3 params instead of 30), Tied K=V projections (share key/value weights), Tied Q=O projections (output = Q transposed), Tied lm_head to dynamic embedding table, RoPE (zero params), QK norms, 4-stage training: cosine→AdamW→AdamW→Adam(no wd) cosine
 
 Results: 10010/10010 correct (100.00%)

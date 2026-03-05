@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-89p (89 parameters).
 
-1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
+1-layer decoder-only transformer, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
 Tied K=V, Tied O=Q^T, 4-stage natural fine-tuning (no test-set intervention).
 """
 
@@ -19,7 +19,7 @@ METADATA = {
     "name": "M10S-89p",
     "author": "Tom Bukic",
     "params": 89,
-    "architecture": "1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
+    "architecture": "1L decoder-only transformer, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
     "tricks": [
         "Tied embeddings",
         "Tied K=V",

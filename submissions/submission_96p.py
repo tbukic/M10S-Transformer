@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-96p (96 parameters).
 
-1L Qwen3 with rank-1 output projection, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
+1-layer decoder-only transformer with rank-1 output projection, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
 Rank-1 factorization of output projection saves 5 params (7 vs 12). Tied K=V.
 """
 
@@ -20,7 +20,7 @@ METADATA = {
     "name": "M10S-96p",
     "author": "Tom Bukic",
     "params": 96,
-    "architecture": "1L Qwen3 + rank-1 output proj, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
+    "architecture": "1L decoder-only transformer + rank-1 output proj, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
     "tricks": [
         "Rank-1 output projection (7 params instead of 12)",
         "Tied embeddings",

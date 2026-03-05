@@ -13,7 +13,7 @@
 
 **Method:** Iterated targeted fine-tuning from multi-stage grokked checkpoint
 
-**Architecture:** 1L Qwen3 decoder, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
+**Architecture:** 1L decoder-only transformer decoder, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
 
 **Key Tricks:**
 - Tied embeddings (input = output)
@@ -32,7 +32,7 @@
 Model: M10S-83p
 Author: Tom Bukic
 Parameters (unique): 83
-Architecture: 1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
+Architecture: 1L decoder-only transformer, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
 Tricks: Tied embeddings, Tied K=V, Tied O=Q^T, Shared all RMSNorms, RoPE (zero params), QK norms, Iterated targeted fine-tuning
 
 Results: 10010/10010 correct (100.00%)

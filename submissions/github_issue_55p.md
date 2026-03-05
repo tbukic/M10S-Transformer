@@ -13,7 +13,7 @@
 
 **Method:** Grokfast-EMA continuation + iterated targeted fine-tuning
 
-**Architecture:** 1L Qwen3 decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
+**Architecture:** 1L decoder-only transformer decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
 
 **Key Tricks:**
 - Circular arc embedding (3 params instead of 30): digit tokens mapped via A*cos(start + stride*i)
@@ -35,7 +35,7 @@
 Model: M10S-55p
 Author: Tom Bukic
 Parameters (unique): 55
-Architecture: 1L Qwen3 + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm
+Architecture: 1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm
 Tricks: Circular arc embedding (3 params instead of 30), K = alpha * Q (scalar replaces 12-param key projection), gate = alpha * up (scalar replaces 6-param gate projection), Tied Q=O projections (output = Q transposed), Shared block RMSNorms (-3 params), RoPE (zero params), QK norms, Grokfast-EMA (alpha=0.98, lambda=2.0), Iterated targeted fine-tuning (6 iterations total, 547 cumulative error pairs)
 
 Results: 10010/10010 correct (100.00%)

@@ -13,7 +13,7 @@
 
 **Method:** Cosine LR from random init + fine-tuning
 
-**Architecture:** 1L Qwen3 decoder + rank-1 output projection, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
+**Architecture:** 1L decoder-only transformer decoder + rank-1 output projection, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
 
 **Key Tricks:**
 - Rank-1 output projection (7 params instead of 12 for full projection)
@@ -30,7 +30,7 @@
 Model: M10S-96p
 Author: Tom Bukic
 Parameters (unique): 96
-Architecture: 1L Qwen3 + rank-1 output proj, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
+Architecture: 1L decoder-only transformer + rank-1 output proj, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU
 Tricks: Rank-1 output projection (7 params instead of 12), Tied embeddings, Tied K=V, RoPE (zero params), QK norms, Cosine LR schedule
 
 Results: 10010/10010 correct (100.00%)

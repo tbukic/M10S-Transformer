@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-122p (122 parameters).
 
-1L Qwen3, d=3, 1h/1kv, hd=4, ff=3, RoPE theta=3, SwiGLU.
+1-layer decoder-only transformer, d=3, 1h/1kv, hd=4, ff=3, RoPE theta=3, SwiGLU.
 Cosine LR with grokking.
 """
 
@@ -19,7 +19,7 @@ METADATA = {
     "name": "M10S-122p",
     "author": "Tom Bukic",
     "params": 122,
-    "architecture": "1L Qwen3, d=3, 1h/1kv, hd=4, ff=3, RoPE theta=3, SwiGLU",
+    "architecture": "1L decoder-only transformer, d=3, 1h/1kv, hd=4, ff=3, RoPE theta=3, SwiGLU",
     "tricks": [
         "Tied embeddings",
         "RoPE (zero params)",

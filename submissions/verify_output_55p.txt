@@ -1,7 +1,7 @@
 Model: M10S-55p
 Author: Tom Bukic
 Parameters (unique): 55
-Architecture: 1L Qwen3 + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm
+Architecture: 1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm
 Tricks: Circular arc embedding (3 params instead of 30), K = alpha * Q (scalar replaces 12-param key projection), gate = alpha * up (scalar replaces 6-param gate projection), Tied Q=O projections (output = Q transposed), Shared block RMSNorms (-3 params), RoPE (zero params), QK norms, Grokfast-EMA (alpha=0.98, lambda=2.0), Iterated targeted fine-tuning (2 iterations, 107 error pairs)
 
   Progress: 1000/10010 (1000/1000 correct) [4.1s]

@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-62p (62 parameters).
 
-1L Qwen3 with circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
+1-layer decoder-only transformer with circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
 Circular arc embedding replaces 30-param lookup table with 3 learnable params.
 Tied K=V and Q=O projections.
 Fine-tuned with Adam (no weight decay) + cosine LR.
@@ -22,7 +22,7 @@ METADATA = {
     "name": "M10S-62p",
     "author": "Tom Bukic",
     "params": 62,
-    "architecture": "1L Qwen3 + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, tieKV+tieQO, RoPE theta=3, SwiGLU",
+    "architecture": "1L decoder-only transformer + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, tieKV+tieQO, RoPE theta=3, SwiGLU",
     "tricks": [
         "Circular arc embedding (3 params instead of 30)",
         "Tied K=V projections (share key/value weights)",

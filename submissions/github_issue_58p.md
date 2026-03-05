@@ -13,7 +13,7 @@
 
 **Method:** Grokfast-EMA continuation + iterated targeted fine-tuning
 
-**Architecture:** 1L Qwen3 decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
+**Architecture:** 1L decoder-only transformer decoder + circular arc embedding, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU, RMSNorm
 
 **Key Tricks:**
 - Circular arc embedding (3 params instead of 30): digit tokens mapped via A*cos(start + stride*i)
@@ -34,7 +34,7 @@
 Model: M10S-58p
 Author: Tom Bukic
 Parameters (unique): 58
-Architecture: 1L Qwen3 + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO
+Architecture: 1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO
 Tricks: Circular arc embedding (3 params instead of 30), K = alpha * Q (scalar replaces 12-param key projection), gate = alpha * up (scalar replaces 6-param gate projection), Tied Q=O projections (output = Q transposed), RoPE (zero params), QK norms, Grokfast-EMA (alpha=0.98, lambda=2.0), Iterated targeted fine-tuning (1 iteration, 9 error pairs)
 
 Results: 10010/10010 correct (100.00%)
@@ -43,7 +43,7 @@ Status: QUALIFIED (threshold: 99%)
 ```
 
 **Additional Notes:**
-- Parameter breakdown: base Qwen3 95p + 9*ff=18 - 27(arc embed) - 12(tieQO) - 11(K=aQ,+1scalar) - 5(gate=a*up,+1scalar) = 58
+- Parameter breakdown: base 95p + 9*ff=18 - 27(arc embed) - 12(tieQO) - 11(K=aQ,+1scalar) - 5(gate=a*up,+1scalar) = 58
 - Training pipeline: 290K cosine LR → 60K Grokfast-EMA (alpha=0.98, lambda=2.0) → targeted FT (1 iter, 9 error pairs)
 - The Grokfast-EMA phase was the key breakthrough: pushed from 83.8% → 99.4% by amplifying slow-varying gradient components
 - Verified 100% on independent 10K test set (seed=42)

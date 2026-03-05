@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-83p (83 parameters).
 
-1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
+1-layer decoder-only transformer, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
 Tied K=V, Tied O=Q^T, shared all RMSNorms, iterated targeted fine-tuning.
 """
 
@@ -20,7 +20,7 @@ METADATA = {
     "name": "M10S-83p",
     "author": "Tom Bukic",
     "params": 83,
-    "architecture": "1L Qwen3, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
+    "architecture": "1L decoder-only transformer, d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU",
     "tricks": [
         "Tied embeddings",
         "Tied K=V",

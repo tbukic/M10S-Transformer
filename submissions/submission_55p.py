@@ -1,6 +1,6 @@
 """AdderBoard submission: M10S-55p (55 parameters).
 
-1L Qwen3 with circular arc embedding + monkey-patched attention and MLP tying.
+1-layer decoder-only transformer with circular arc embedding + monkey-patched attention and MLP tying.
 d=3, 1h/1kv, hd=4, ff=2, RoPE theta=3, SwiGLU.
 K=alpha*Q (scalar replaces key projection), gate=alpha*up (scalar replaces gate projection).
 Shared block RMSNorms, tied Q=O projections.
@@ -22,7 +22,7 @@ METADATA = {
     "name": "M10S-55p",
     "author": "Tom Bukic",
     "params": 55,
-    "architecture": "1L Qwen3 + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm",
+    "architecture": "1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm",
     "tricks": [
         "Circular arc embedding (3 params instead of 30)",
         "K = alpha * Q (scalar replaces 12-param key projection)",
