@@ -45,4 +45,4 @@ Status: QUALIFIED (threshold: 99%)
 - Verified on independent 50K held-out set (seed=99): 0 errors
 - Out of 73 seeds evaluated, 55/73 grok; 1/24 4th-stage seeds reach 0 errors naturally
 - Parameter formula: P = 95 + 9*ff - 12*tieKV - 12*tieQO = 95 + 18 - 12 - 12 = 89
-- Paper: https://github.com/tbukic/M10S-Transformer/blob/master/paper/main.pdf
+- Paper: https://github.com/tbukic/M10S-Transformer/blob/main/paper/main.pdf

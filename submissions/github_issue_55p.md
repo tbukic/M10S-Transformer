@@ -58,4 +58,4 @@ Status: QUALIFIED (threshold: 99%)
 - Training pipeline: 295K cosine LR (81.2%) → 325K Grokfast-EMA (100% on 500-sample) → 6 iterations targeted FT (547 cumulative pairs)
 - Grokfast-EMA was the key breakthrough: amplifies slow-varying gradient components, pushed from 81% → 95%+
 - 58p variant (without shared block norms) also achieves 100%
-- Paper with full methodology: https://github.com/tbukic/M10S-Transformer/blob/master/paper/main.pdf
+- Paper with full methodology: https://github.com/tbukic/M10S-Transformer/blob/main/paper/main.pdf

@@ -40,4 +40,4 @@ Status: QUALIFIED (threshold: 99%)
 **Additional Notes:**
 - Parameter formula: P = 95 + 9*ff - 12*tieQO = 95 + 18 - 12 = 101
 - Also verified on independent 50K held-out set (seed=99): 0 errors
-- Paper: https://github.com/tbukic/M10S-Transformer/blob/master/paper/main.pdf
+- Paper: https://github.com/tbukic/M10S-Transformer/blob/main/paper/main.pdf

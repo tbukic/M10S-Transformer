@@ -41,4 +41,4 @@ Status: QUALIFIED (threshold: 99%)
 - Parameter formula: P = 95 + 9*ff = 95 + 27 = 122
 - This is our baseline model with no weight tying beyond standard tied embeddings
 - 4/10 seeds grok from scratch; s6 reaches 100% at step 30K
-- Paper: https://github.com/tbukic/M10S-Transformer/blob/master/paper/main.pdf
+- Paper: https://github.com/tbukic/M10S-Transformer/blob/main/paper/main.pdf

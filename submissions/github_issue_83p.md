@@ -45,4 +45,4 @@ Status: QUALIFIED (threshold: 99%)
 - Trained from random init via AdamW, then 4-round iterated targeted FT (157->9->2->4->0 errors)
 - Also verified on independent 50K held-out set (seed=99, zero overlap): 0 errors
 - 89p variant achieves 100% via natural 4-stage FT with NO test-set intervention
-- Paper with full methodology: https://github.com/tbukic/M10S-Transformer/blob/master/paper/main.pdf
+- Paper with full methodology: https://github.com/tbukic/M10S-Transformer/blob/main/paper/main.pdf
