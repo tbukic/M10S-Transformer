@@ -1,0 +1,20 @@
+Model: M10S-55p
+Author: Tom Bukic
+Parameters (unique): 55
+Architecture: 1L Qwen3 + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=aQ, gate=a*up, tieQO, shbnorm
+Tricks: Circular arc embedding (3 params instead of 30), K = alpha * Q (scalar replaces 12-param key projection), gate = alpha * up (scalar replaces 6-param gate projection), Tied Q=O projections (output = Q transposed), Shared block RMSNorms (-3 params), RoPE (zero params), QK norms, Grokfast-EMA (alpha=0.98, lambda=2.0), Iterated targeted fine-tuning (2 iterations, 107 error pairs)
+
+  Progress: 1000/10010 (1000/1000 correct) [4.1s]
+  Progress: 2000/10010 (2000/2000 correct) [8.0s]
+  Progress: 3000/10010 (3000/3000 correct) [13.6s]
+  Progress: 4000/10010 (4000/4000 correct) [19.0s]
+  Progress: 5000/10010 (5000/5000 correct) [23.2s]
+  Progress: 6000/10010 (6000/6000 correct) [27.7s]
+  Progress: 7000/10010 (7000/7000 correct) [31.6s]
+  Progress: 8000/10010 (8000/8000 correct) [35.6s]
+  Progress: 9000/10010 (9000/9000 correct) [39.7s]
+  Progress: 10000/10010 (10000/10000 correct) [43.6s]
+
+Results: 10010/10010 correct (100.00%)
+Time: 43.7s (229 additions/sec)
+Status: QUALIFIED (threshold: 99%)

@@ -1,0 +1,278 @@
+# ============================================================================
+# Reproduction configs for ALL submitted models
+# ============================================================================
+#
+# Usage:
+#   uv run experiments/reproduce.py 89p
+#   uv run experiments/reproduce.py 122p --seed 42
+#   uv run experiments/reproduce.py --all
+#   uv run experiments/reproduce.py --list
+#
+# Reserved seeds (NEVER use for training):
+#   42   = test_10k.json generation
+#   2025 = verify.py official test
+#   123  = holdout 10K
+#   99   = holdout 50K independent
+#
+# Phase types:
+#   cosine      — AdamW, cosine LR decay (lr → lr * min_lr_ratio)
+#   constant    — AdamW, constant LR
+#   cosine_nowd — Adam (no weight decay), cosine LR → 0
+#   lbfgs       — L-BFGS optimizer
+#   targeted    — iterated targeted FT on error pairs
+#
+# Phase keys:
+#   lr, batch_size, steps, weight_decay (default 0.01)
+#   eval_interval (default 2000)
+#   use_final (default false): next phase loads final.pt instead of best.pt
+#   ema_decay (default 0): if > 0, maintain EMA weights
+#   min_lr_ratio (default 0.1): for cosine phases
+#   stage_seed: override random seed for this stage
+#   --- lbfgs only ---
+#   max_iter (default 30), history_size (default 10)
+#   --- targeted only ---
+#   max_iters (default 10), steps_per_iter (default 3000)
+# ============================================================================
+
+# Shared defaults merged into every model's model_args
+defaults:
+  d_model: 3
+  n_heads: 1
+  n_kv_heads: 1
+  head_dim: 4
+  rope_theta: 3.0
+
+models:
+
+  # ----- Qwen3 architecture -----
+
+  122p:
+    desc: "Qwen3 ff=3, no weight tying — baseline"
+    arch: qwen3
+    params: 122
+    proven_seed: 6
+    model_args:
+      ff: 3
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 200000
+        eval_interval: 5000
+
+  113p:
+    desc: "Qwen3 ff=2 — reduced MLP"
+    arch: qwen3
+    params: 113
+    proven_seed: 1
+    model_args:
+      ff: 2
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 50000
+        eval_interval: 2000
+      - type: constant
+        lr: 0.001
+        batch_size: 256
+        steps: 30000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 3000
+        max_iters: 10
+        eval_interval: 500
+
+  101p:
+    desc: "Qwen3 ff=2, tieQO"
+    arch: qwen3
+    params: 101
+    proven_seed: 13
+    model_args:
+      ff: 2
+      tie_qo: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 50000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 1000
+        max_iters: 10
+        eval_interval: 500
+
+  89p:
+    desc: "Qwen3 ff=2, tieKV+tieQO — fast grokker"
+    arch: qwen3
+    params: 89
+    proven_seed: 5
+    model_args:
+      ff: 2
+      tie_kv: true
+      tie_qo: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 100000
+        eval_interval: 5000
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 1000
+        max_iters: 10
+        eval_interval: 500
+
+  86p:
+    desc: "Qwen3 ff=2, tieKV+tieQO+shbnorm — L-BFGS/targeted"
+    arch: qwen3
+    params: 86
+    proven_seed: 1
+    model_args:
+      ff: 2
+      tie_kv: true
+      tie_qo: true
+      share_block_norms: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 100000
+        eval_interval: 2000
+      - type: lbfgs
+        lr: 0.5
+        batch_size: 512
+        steps: 300
+        max_iter: 30
+        history_size: 10
+        eval_interval: 50
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 500
+        max_iters: 10
+        eval_interval: 100
+
+  83p:
+    desc: "Qwen3 ff=2, tieKV+tieQO+shnorm — iterated targeted"
+    arch: qwen3
+    params: 83
+    proven_seed: 5
+    model_args:
+      ff: 2
+      tie_kv: true
+      tie_qo: true
+      share_norms: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 100000
+        eval_interval: 2000
+        use_final: true
+      - type: constant
+        lr: 0.001
+        batch_size: 128
+        steps: 30000
+        eval_interval: 2000
+      - type: constant
+        lr: 0.0003
+        batch_size: 128
+        steps: 30000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 5000
+        max_iters: 10
+        eval_interval: 1000
+
+  # ----- Rank-1 Output architecture -----
+
+  96p:
+    desc: "Rank1Out ff=2, tieKV"
+    arch: rank1_out
+    params: 96
+    proven_seed: 9999
+    model_args:
+      ff: 2
+      tie_kv: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 200000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.0003
+        batch_size: 256
+        steps_per_iter: 3000
+        max_iters: 5
+        eval_interval: 500
+
+  # ----- Circular Arc architecture -----
+
+  95p:
+    desc: "CircularArc ff=3"
+    arch: circular_arc
+    params: 95
+    proven_seed: 0
+    model_args:
+      ff: 3
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 50000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.001
+        batch_size: 256
+        steps_per_iter: 3000
+        max_iters: 5
+        eval_interval: 500
+
+  62p:
+    desc: "CircularArc ff=2, tieKV+tieQO — 5-stage pipeline"
+    arch: circular_arc
+    params: 62
+    proven_seed: 42
+    model_args:
+      ff: 2
+      tie_kv: true
+      tie_qo: true
+    phases:
+      - type: cosine
+        lr: 0.01
+        batch_size: 128
+        steps: 200000
+        eval_interval: 2000
+      - type: constant
+        lr: 0.001
+        batch_size: 256
+        steps: 50000
+        eval_interval: 2000
+        ema_decay: 0.999
+      - type: constant
+        lr: 0.0003
+        batch_size: 256
+        steps: 30000
+        eval_interval: 2000
+        ema_decay: 0.999
+        stage_seed: 101
+      - type: cosine_nowd
+        lr: 0.001
+        batch_size: 256
+        steps: 50000
+        eval_interval: 2000
+      - type: targeted
+        lr: 0.001
+        batch_size: 256
+        steps_per_iter: 3000
+        max_iters: 10
+        eval_interval: 500

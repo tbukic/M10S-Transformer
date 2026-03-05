@@ -15,6 +15,7 @@ import torch.nn.functional as F
 from minimal10digittransformer.model.qwen3 import (
     Qwen3Block,
     RMSNorm,
+    create_causal_mask,
     precompute_rope_freqs,
     VOCAB_SIZE,
     TOTAL_LEN,
@@ -35,6 +36,7 @@ class CircularArcQwen3(nn.Module):
                  use_swiglu: bool = True, tie_kv: bool = False,
                  tie_qo: bool = False, tie_gate: bool = False, repeats: int = 1,
                  share_norms: bool = False, share_block_norms: bool = False,
+                 activation: str = "default", window_size: int = 0,
                  arc_init_A: float = 2.5, arc_init_start: float = -1.2,
                  arc_init_stride: float = 0.29):
         super().__init__()
@@ -62,12 +64,11 @@ class CircularArcQwen3(nn.Module):
                                 rope_cos, rope_sin, qk_norm=qk_norm,
                                 use_swiglu=use_swiglu, tie_kv=tie_kv,
                                 tie_qo=tie_qo, tie_gate=tie_gate,
-                                shared_norm=shared_norm)
+                                shared_norm=shared_norm, activation=activation)
         self.final_norm = shared_norm if share_norms else RMSNorm(d_model)
 
-        # Causal mask
-        mask = torch.full((max_len, max_len), float("-inf"))
-        mask = torch.triu(mask, diagonal=1)
+        # Causal mask (with optional sliding window)
+        mask = create_causal_mask(max_len, window_size)
         self.register_buffer("causal_mask", mask, persistent=False)
 
         # Init weights (skip embedding since we use arc params)

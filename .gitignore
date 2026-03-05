@@ -62,6 +62,7 @@
 !experiments/**/*.py
 !experiments/**/*.json
 !experiments/**/*.yaml
+!experiments/**/*.md
 # Archive — old experiments, not needed for reproduction
 experiments/archive/
 
@@ -89,6 +90,10 @@ experiments/archive/
 !checkpoints/qwen3_arc_95p_ft_s9999/*
 !checkpoints/qwen3_rank1_96p_tiekv_s9999/
 !checkpoints/qwen3_rank1_96p_tiekv_s9999/*
+!checkpoints/qwen3_arc_55p_tying_s1_targeted/
+!checkpoints/qwen3_arc_55p_tying_s1_targeted/*
+!checkpoints/qwen3_arc_58p_tying_s1_targeted/
+!checkpoints/qwen3_arc_58p_tying_s1_targeted/*
 
 # Scripts
 !scripts/
@@ -103,6 +108,7 @@ experiments/archive/
 !submissions/
 !submissions/**/*.py
 !submissions/**/*.txt
+!submissions/**/*.md
 
 # AdderBoard verify.py
 !verify.py

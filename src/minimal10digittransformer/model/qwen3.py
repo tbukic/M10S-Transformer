@@ -24,6 +24,22 @@ OUTPUT_LEN = SUM_DIGITS
 TOTAL_LEN = INPUT_LEN + OUTPUT_LEN  # 35
 
 
+# ── Causal Mask ──────────────────────────────────────────────────────────────
+
+def create_causal_mask(max_len: int, window_size: int = 0) -> torch.Tensor:
+    """Causal mask, optionally with sliding window.
+
+    window_size=0: standard full causal (default, no behavior change)
+    window_size=W: each position attends to at most W previous positions
+                   (including self)
+    """
+    mask = torch.full((max_len, max_len), float("-inf"))
+    for i in range(max_len):
+        start = max(0, i - window_size + 1) if window_size > 0 else 0
+        mask[i, start:i + 1] = 0.0
+    return mask
+
+
 # ── RoPE ─────────────────────────────────────────────────────────────────────
 
 def precompute_rope_freqs(head_dim: int, max_len: int, theta: float = 3.0):
@@ -130,10 +146,13 @@ class Qwen3Attention(nn.Module):
 
 class Qwen3MLP(nn.Module):
     def __init__(self, d_model: int, intermediate_size: int, use_swiglu: bool = True,
-                 tie_gate: bool = False):
+                 tie_gate: bool = False, activation: str = "default"):
         super().__init__()
         self.use_swiglu = use_swiglu
         self.tie_gate = tie_gate
+        # activation: "default" = silu for swiglu / gelu for non-swiglu,
+        #             "relu", "silu", "gelu"
+        self.activation = activation
         if use_swiglu:
             if not tie_gate:
                 self.gate_proj = nn.Linear(d_model, intermediate_size, bias=False)
@@ -142,12 +161,23 @@ class Qwen3MLP(nn.Module):
             self.up_proj = nn.Linear(d_model, intermediate_size, bias=False)
         self.down_proj = nn.Linear(intermediate_size, d_model, bias=False)
 
+    def _act(self, x):
+        if self.activation == "relu":
+            return F.relu(x)
+        elif self.activation == "silu":
+            return F.silu(x)
+        elif self.activation == "gelu":
+            return F.gelu(x)
+        elif self.activation == "default":
+            return F.silu(x) if self.use_swiglu else F.gelu(x)
+        return F.silu(x) if self.use_swiglu else F.gelu(x)
+
     def forward(self, x):
         if self.use_swiglu:
             gate_proj = self.up_proj if self.tie_gate else self.gate_proj
-            return self.down_proj(F.silu(gate_proj(x)) * self.up_proj(x))
+            return self.down_proj(self._act(gate_proj(x)) * self.up_proj(x))
         else:
-            return self.down_proj(F.gelu(self.up_proj(x)))
+            return self.down_proj(self._act(self.up_proj(x)))
 
 
 # ── Transformer Block ────────────────────────────────────────────────────────
@@ -157,7 +187,7 @@ class Qwen3Block(nn.Module):
                  head_dim: int, ff: int, rope_cos, rope_sin,
                  qk_norm: bool = True, use_swiglu: bool = True, tie_kv: bool = False,
                  tie_qo: bool = False, tie_gate: bool = False,
-                 shared_norm: nn.Module = None):
+                 shared_norm: nn.Module = None, activation: str = "default"):
         super().__init__()
         if shared_norm is not None:
             self.ln1 = shared_norm
@@ -166,7 +196,7 @@ class Qwen3Block(nn.Module):
             self.ln1 = RMSNorm(d_model)
             self.ln2 = RMSNorm(d_model)
         self.attn = Qwen3Attention(d_model, n_heads, n_kv_heads, head_dim, rope_cos, rope_sin, qk_norm=qk_norm, tie_kv=tie_kv, tie_qo=tie_qo)
-        self.mlp = Qwen3MLP(d_model, ff, use_swiglu=use_swiglu, tie_gate=tie_gate)
+        self.mlp = Qwen3MLP(d_model, ff, use_swiglu=use_swiglu, tie_gate=tie_gate, activation=activation)
 
     def forward(self, x, mask=None):
         x = x + self.attn(self.ln1(x), mask)
@@ -182,7 +212,8 @@ class Qwen3AdditionModel(nn.Module):
                  max_len: int = TOTAL_LEN + 1, qk_norm: bool = True,
                  use_swiglu: bool = True, tie_kv: bool = False,
                  tie_qo: bool = False, tie_gate: bool = False, repeats: int = 1,
-                 share_norms: bool = False, share_block_norms: bool = False):
+                 share_norms: bool = False, share_block_norms: bool = False,
+                 activation: str = "default", window_size: int = 0):
         super().__init__()
         self.d_model = d_model
         self.repeats = repeats
@@ -209,12 +240,11 @@ class Qwen3AdditionModel(nn.Module):
                                 rope_cos, rope_sin, qk_norm=qk_norm,
                                 use_swiglu=use_swiglu, tie_kv=tie_kv,
                                 tie_qo=tie_qo, tie_gate=tie_gate,
-                                shared_norm=shared_norm)
+                                shared_norm=shared_norm, activation=activation)
         self.final_norm = shared_norm if share_norms else RMSNorm(d_model)
 
-        # Causal mask
-        mask = torch.full((max_len, max_len), float("-inf"))
-        mask = torch.triu(mask, diagonal=1)
+        # Causal mask (with optional sliding window)
+        mask = create_causal_mask(max_len, window_size)
         self.register_buffer("causal_mask", mask, persistent=False)
 
         # Init weights
