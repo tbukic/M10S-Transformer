@@ -94,6 +94,10 @@ experiments/archive/
 !checkpoints/qwen3_arc_55p_tying_s1_targeted/*
 !checkpoints/qwen3_arc_58p_tying_s1_targeted/
 !checkpoints/qwen3_arc_58p_tying_s1_targeted/*
+!checkpoints/qwen3_arc_44p_KeqQ_s27/
+!checkpoints/qwen3_arc_44p_KeqQ_s27/*
+!checkpoints/qwen3_arc_45p_KrotQ_targeted/
+!checkpoints/qwen3_arc_45p_KrotQ_targeted/*
 
 # Scripts
 !scripts/
@@ -109,6 +113,8 @@ experiments/archive/
 !submissions/**/*.py
 !submissions/**/*.txt
 !submissions/**/*.md
+# GitHub issue drafts are NOT tracked — kept local only, not submitted to GH
+submissions/github_issue_*.md
 
 # AdderBoard verify.py
 !verify.py

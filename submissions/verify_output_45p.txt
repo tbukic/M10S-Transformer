@@ -1,0 +1,8 @@
+Model: M10S-45p
+Author: Tom Bukic
+Parameters (unique): 45
+Architecture: 1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=rot(Q), V=Q, tieQO, shnorm
+Tricks: Circular arc embedding (3 params instead of 30), K = rotation(Q) (1-param 2D rotation replaces 12-param key projection), V = Q (value projection shares query weights, saves 12 params), Tied Q=O projections (output = Q transposed), All 3 RMSNorms shared (ln1=ln2=final_norm, saves 6 params), RoPE (zero params), QK norms, Curriculum + Grokfast-EMA + targeted fine-tuning
+
+Results: 10010/10010 correct (100.00%)
+Status: QUALIFIED (threshold: 99%)
