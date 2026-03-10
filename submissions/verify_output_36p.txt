@@ -1,0 +1,33 @@
+warning: `VIRTUAL_ENV=/workspaces/Minimal10DigitTransformer/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Model: M10S-36p
+Author: Tom Bukic
+Parameters (unique): 36
+Architecture: 1L decoder-only transformer + circular arc embed, d=3, 1h/1kv, hd=4, ff=2, K=rot(Q), V=Q, tieQO, shnorm, tieQKnorm, down=rot(up^T)
+Tricks: Circular arc embedding (3 params instead of 30), K = rotation(Q) (1-param 2D rotation replaces 12-param key projection), V = Q (value shares query weights, 0 extra params), Tied Q=O projections (output = Q transposed), All 3 RMSNorms shared (ln1=ln2=final_norm, saves 6 params), Tied QK norms (q_norm and k_norm share weights, saves 4 params), down = rotation(up^T) (1-param rotation + transpose replaces 6-param down projection), RoPE (zero params), SwiGLU MLP at ff=2, Curriculum + Grokfast-EMA + adaptive weight decay, Micro-targeted fine-tuning (iterative, ultra-gentle lr=1e-5 to 5e-5)
+
+  Progress: 1000/10010 (999/1000 correct) [6.5s]
+  Progress: 2000/10010 (1998/2000 correct) [11.8s]
+  Progress: 3000/10010 (2996/3000 correct) [19.6s]
+  Progress: 4000/10010 (3995/4000 correct) [24.3s]
+  Progress: 5000/10010 (4995/5000 correct) [29.3s]
+  Progress: 6000/10010 (5994/6000 correct) [34.5s]
+  Progress: 7000/10010 (6992/7000 correct) [40.4s]
+  Progress: 8000/10010 (7992/8000 correct) [46.0s]
+  Progress: 9000/10010 (8991/9000 correct) [50.8s]
+  Progress: 10000/10010 (9990/10000 correct) [56.2s]
+
+Results: 10000/10010 correct (99.90%)
+Time: 56.3s (178 additions/sec)
+Status: QUALIFIED (threshold: 99%)
+
+Failures (10):
+  3820526709 + 8513535880 = 12334062589, got 12334062599
+  2658995808 + 8721558881 = 11380554689, got 11380554699
+  1044590913 + 3831288067 = 4875878980, got 4875879980
+  2296850927 + 1397978067 = 3694828994, got 3694829994
+  5010609108 + 8898946670 = 13909555778, got 13809555778
+  3955784385 + 9955826230 = 13911610615, got 12911610615
+  520676708 + 6554867981 = 7075544689, got 7075544699
+  9014964102 + 9790075231 = 18805039333, got 18905039333
+  3752311509 + 6323735980 = 10076047489, got 10076047499
+  8899370131 + 6194497925 = 15093868056, got 15093869056

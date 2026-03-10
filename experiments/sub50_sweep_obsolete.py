@@ -424,6 +424,95 @@ ALGORITHMS = [
      "cdp": True, "cdp_scale": 0.1, "cdp_cycle": 10000, "cdp_target": "attn"},
     {"name": "adamw+cdp_all", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.01,
      "cdp": True, "cdp_scale": 0.1, "cdp_cycle": 10000, "cdp_target": "all"},
+
+    # ── Low-LR + high-WD variants (for ultra-small models with scale degeneracy) ──
+
+    # Low LR (0.001) + grokfast: 10x smaller steps, WD becomes proportionally stronger
+    {"name": "adamw_lr001+gf", "optimizer": "adamw", "lr": 0.001, "weight_decay": 0.01,
+     "grokfast": True},
+
+    # Low LR + high WD (0.1): aggressively penalize weight growth
+    {"name": "adamw_lr001_wd01+gf", "optimizer": "adamw", "lr": 0.001, "weight_decay": 0.1,
+     "grokfast": True},
+
+    # Medium LR (0.003) + high WD: compromise
+    {"name": "adamw_lr003_wd01+gf", "optimizer": "adamw", "lr": 0.003, "weight_decay": 0.1,
+     "grokfast": True},
+
+    # Standard LR + high WD: same steps but stronger regularization
+    {"name": "adamw_wd01+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.1,
+     "grokfast": True},
+
+    # Very high WD (0.3) + low LR: extreme regularization
+    {"name": "adamw_lr001_wd03+gf", "optimizer": "adamw", "lr": 0.001, "weight_decay": 0.3,
+     "grokfast": True},
+
+    # ── Simple baselines (no WD, no adaptive LR) ──
+    {"name": "sgd", "optimizer": "sgd", "lr": 0.01, "weight_decay": 0.0},
+    {"name": "sgd_lr001", "optimizer": "sgd", "lr": 0.001, "weight_decay": 0.0},
+    {"name": "sgd_mom", "optimizer": "sgd_momentum", "lr": 0.01, "weight_decay": 0.0},
+    {"name": "adam_nowd", "optimizer": "adam", "lr": 0.01, "weight_decay": 0.0},
+    {"name": "adam_nowd+gf", "optimizer": "adam", "lr": 0.01, "weight_decay": 0.0,
+     "grokfast": True},
+
+    # ── Explicit L2 regularization (added to loss, flows through Adam momentum) ──
+    # Different from weight decay because L2 gradient goes through Adam's adaptive LR
+    {"name": "adamw+l2_01+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "l2_lambda": 0.1, "grokfast": True},
+    {"name": "adamw+l2_001+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "l2_lambda": 0.01, "grokfast": True},
+    {"name": "adamw+l2_1+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "l2_lambda": 1.0, "grokfast": True},
+
+    # ── 2nd-order / derivative-free methods (for ultra-small models ≤50 params) ──
+
+    # L-BFGS: quasi-Newton, approximates inverse Hessian
+    {"name": "lbfgs", "optimizer": "lbfgs", "lr": 1.0, "batch_size": 512},
+    {"name": "lbfgs_lr01", "optimizer": "lbfgs", "lr": 0.1, "batch_size": 512},
+    {"name": "lbfgs_lr001", "optimizer": "lbfgs", "lr": 0.01, "batch_size": 512},
+
+    # CMA-ES: covariance matrix adaptation evolution strategy (gradient-free)
+    {"name": "cmaes", "optimizer": "cmaes", "sigma0": 0.5, "batch_size": 512},
+    {"name": "cmaes_sig01", "optimizer": "cmaes", "sigma0": 0.1, "batch_size": 512},
+    {"name": "cmaes_sig1", "optimizer": "cmaes", "sigma0": 1.0, "batch_size": 512},
+
+    # ── SAM (Sharpness-Aware Minimization) ──
+    # Double forward+backward: ascend by rho * grad/||grad||, then descend on perturbed loss
+    {"name": "sam", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.01,
+     "sam": True, "sam_rho": 0.05},
+    {"name": "sam+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.01,
+     "sam": True, "sam_rho": 0.05, "grokfast": True},
+    {"name": "sam_rho02", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.01,
+     "sam": True, "sam_rho": 0.2},
+    {"name": "sam_rho02+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.01,
+     "sam": True, "sam_rho": 0.2, "grokfast": True},
+
+    # ── Per-param LR groups ──
+    # Gate/scalar params get lower LR, norms get higher LR
+    {"name": "pplr", "optimizer": "adamw_pplr", "lr": 0.01, "weight_decay": 0.01,
+     "lr_gate_mult": 0.1, "lr_norm_mult": 3.0},
+    {"name": "pplr+gf", "optimizer": "adamw_pplr", "lr": 0.01, "weight_decay": 0.01,
+     "lr_gate_mult": 0.1, "lr_norm_mult": 3.0, "grokfast": True},
+    {"name": "pplr_gm03+gf", "optimizer": "adamw_pplr", "lr": 0.01, "weight_decay": 0.01,
+     "lr_gate_mult": 0.3, "lr_norm_mult": 3.0, "grokfast": True},
+
+    # ── Weight norm constraint (OmniGrok) ──
+    # After optimizer step, project all weight matrices onto norm ball of radius R
+    {"name": "omnigrok", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "norm_constraint": True, "norm_radius": 1.0},
+    {"name": "omnigrok+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "norm_constraint": True, "norm_radius": 1.0, "grokfast": True},
+    {"name": "omnigrok_r05+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "norm_constraint": True, "norm_radius": 0.5, "grokfast": True},
+    {"name": "omnigrok_r2+gf", "optimizer": "adamw", "lr": 0.01, "weight_decay": 0.0,
+     "norm_constraint": True, "norm_radius": 2.0, "grokfast": True},
+
+    # ── Full Newton (exact Hessian, tractable for ≤50 params) ──
+    {"name": "newton", "optimizer": "newton", "lr": 0.1, "batch_size": 512},
+    {"name": "newton_lr01", "optimizer": "newton", "lr": 0.01, "batch_size": 512},
+    {"name": "newton_lr1", "optimizer": "newton", "lr": 1.0, "batch_size": 512},
+    {"name": "newton_damp", "optimizer": "newton", "lr": 0.1, "batch_size": 512,
+     "newton_damping": 0.1},
 ]
 
 SEEDS = list(range(50))  # 50 seeds
@@ -868,11 +957,26 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
     perturb_gamma_init = algo_cfg.get("perturb_gamma", 0.01)
     perturb_cycle = algo_cfg.get("perturb_cycle", 5000)
 
+    # Explicit L2 regularization (added to loss, NOT weight decay)
+    l2_lambda = algo_cfg.get("l2_lambda", 0.0)
+
     # CDP v2: frozen overlay cycling directional perturbation
     use_cdp = algo_cfg.get("cdp", False)
     cdp_scale = algo_cfg.get("cdp_scale", 0.1)  # fraction of ||W|| for overlay magnitude
     cdp_cycle = algo_cfg.get("cdp_cycle", 10000)
     cdp_target = algo_cfg.get("cdp_target", "proj")  # "proj", "attn", "mlp", "all"
+
+    # SAM (Sharpness-Aware Minimization)
+    use_sam = algo_cfg.get("sam", False)
+    sam_rho = algo_cfg.get("sam_rho", 0.05)
+
+    # Weight norm constraint (OmniGrok)
+    use_norm_constraint = algo_cfg.get("norm_constraint", False)
+    norm_radius = algo_cfg.get("norm_radius", 1.0)
+
+    # Per-param LR group multipliers
+    lr_gate_mult = algo_cfg.get("lr_gate_mult", 1.0)
+    lr_norm_mult = algo_cfg.get("lr_norm_mult", 1.0)
 
     # Build optimizer
     if opt_name == "rmsprop":
@@ -882,6 +986,35 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
         optimizer = torch.optim.AdamW(model.parameters(), lr=lr,
                                        betas=(0.98, 0.999),
                                        weight_decay=weight_decay)
+    elif opt_name == "sgd":
+        optimizer = torch.optim.SGD(model.parameters(), lr=lr,
+                                     weight_decay=weight_decay)
+    elif opt_name == "sgd_momentum":
+        optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9,
+                                     weight_decay=weight_decay)
+    elif opt_name == "adam":
+        optimizer = torch.optim.Adam(model.parameters(), lr=lr,
+                                      weight_decay=weight_decay)
+    elif opt_name == "adamw_pplr":
+        # Per-parameter LR groups: gate/scalar params get lower LR, norms get higher
+        gate_params, norm_params, other_params = [], [], []
+        for name, p in model.named_parameters():
+            if not p.requires_grad:
+                continue
+            if "alpha" in name or "log_alpha" in name or "alpha_vec" in name or "theta" in name:
+                gate_params.append(p)
+            elif "norm" in name:
+                norm_params.append(p)
+            else:
+                other_params.append(p)
+        param_groups = [
+            {"params": other_params, "lr": lr},
+            {"params": gate_params, "lr": lr * lr_gate_mult},
+            {"params": norm_params, "lr": lr * lr_norm_mult},
+        ]
+        # Filter empty groups
+        param_groups = [g for g in param_groups if g["params"]]
+        optimizer = torch.optim.AdamW(param_groups, weight_decay=weight_decay)
     else:  # adamw
         optimizer = torch.optim.AdamW(model.parameters(), lr=lr,
                                        weight_decay=weight_decay)
@@ -937,6 +1070,25 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
     csv_file = open(csv_path, "w", newline="")
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(["step", "loss", "acc", "lr", "wd"])
+
+    # Gradient/param logging for small models (≤50 params)
+    # Logs every step in RAM, flushes to disk every eval_interval steps
+    log_gradients = n_params <= 50
+    grad_log_file = None
+    grad_log_writer = None
+    grad_buffer = []
+    param_names = []
+    if log_gradients:
+        param_names = [n for n, p in model.named_parameters() if p.requires_grad]
+        grad_csv_path = csv_path.replace(".csv", ".grad.csv")
+        grad_log_file = open(grad_csv_path, "w", newline="")
+        grad_log_writer = csv.writer(grad_log_file)
+        # Header: step, loss, then for each param: val, grad, update
+        header = ["step", "loss"]
+        for pn in param_names:
+            short = pn.replace("block.", "").replace("attn.", "").replace("mlp.", "")
+            header.extend([f"{short}_val", f"{short}_grad", f"{short}_upd"])
+        grad_log_writer.writerow(header)
 
     t0 = time.time()
     best_acc = 0.0
@@ -1008,8 +1160,49 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
         shift_labels = labels[:, 1:].reshape(-1)
         loss = F.cross_entropy(shift_logits, shift_labels, ignore_index=-100)
 
+        # Explicit L2 regularization (added to loss, flows through Adam momentum)
+        if l2_lambda > 0:
+            l2_reg = sum(p.pow(2).sum() for p in model.parameters() if p.requires_grad)
+            loss = loss + l2_lambda * l2_reg
+
         optimizer.zero_grad()
         loss.backward()
+
+        # SAM: Sharpness-Aware Minimization (double forward-backward)
+        if use_sam:
+            # Save original gradients and params
+            _sam_grads = {}
+            _sam_orig = {}
+            grad_norm = 0.0
+            for pname, p in model.named_parameters():
+                if p.requires_grad and p.grad is not None:
+                    _sam_grads[pname] = p.grad.clone()
+                    _sam_orig[pname] = p.data.clone()
+                    grad_norm += p.grad.pow(2).sum().item()
+            grad_norm = math.sqrt(grad_norm) + 1e-12
+
+            # Ascend: perturb weights by epsilon = rho * grad / ||grad||
+            with torch.no_grad():
+                for pname, p in model.named_parameters():
+                    if pname in _sam_grads:
+                        epsilon = sam_rho * _sam_grads[pname] / grad_norm
+                        p.add_(epsilon)
+
+            # Recompute loss and gradients at perturbed point
+            optimizer.zero_grad()
+            logits2 = model(full_seq)
+            shift_logits2 = logits2[:, :-1, :].reshape(-1, VOCAB_SIZE)
+            loss_sam = F.cross_entropy(shift_logits2, shift_labels, ignore_index=-100)
+            if l2_lambda > 0:
+                l2_reg2 = sum(p.pow(2).sum() for p in model.parameters() if p.requires_grad)
+                loss_sam = loss_sam + l2_lambda * l2_reg2
+            loss_sam.backward()
+
+            # Restore original weights (optimizer will update from restored position)
+            with torch.no_grad():
+                for pname, p in model.named_parameters():
+                    if pname in _sam_orig:
+                        p.copy_(_sam_orig[pname])
 
         # Grokfast-EMA gradient filter
         if use_grokfast:
@@ -1035,7 +1228,43 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
                     p.grad.add_(noise)
 
         nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+
+        # Snapshot for gradient logging (before optimizer step)
+        if log_gradients:
+            _pre_vals = {n: p.data.clone() for n, p in model.named_parameters() if p.requires_grad}
+            _grads = {n: p.grad.clone() if p.grad is not None else torch.zeros_like(p.data)
+                      for n, p in model.named_parameters() if p.requires_grad}
+
         optimizer.step()
+
+        # Weight norm constraint (OmniGrok): project weights onto norm ball
+        if use_norm_constraint:
+            with torch.no_grad():
+                for p in model.parameters():
+                    if p.requires_grad and p.data.numel() > 1:
+                        w_norm = p.data.norm()
+                        if w_norm > norm_radius:
+                            p.data.mul_(norm_radius / w_norm)
+
+        # Log gradient info after every step (buffer in RAM)
+        if log_gradients:
+            row = [step, f"{loss.item():.6f}"]
+            _named = dict(model.named_parameters())
+            for pn in param_names:
+                p = _named[pn]
+                val = p.data.flatten()
+                grad = _grads[pn].flatten()
+                upd = (p.data - _pre_vals[pn]).flatten()
+                if val.numel() == 1:
+                    row.extend([f"{val.item():.6f}", f"{grad.item():.6f}", f"{upd.item():.6f}"])
+                else:
+                    row.extend([f"{val.norm().item():.6f}", f"{grad.norm().item():.6f}", f"{upd.norm().item():.6f}"])
+            grad_buffer.append(row)
+            # Flush to disk every 10K steps (small write, ~1MB)
+            if step % 10000 == 0:
+                grad_log_writer.writerows(grad_buffer)
+                grad_log_file.flush()
+                grad_buffer.clear()
         # CDP: overlay is frozen — optimizer naturally preserves it in p.data
 
         # Cyclic directional perturbation v1 (deprecated, kept for running experiments)
@@ -1070,15 +1299,24 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
 
             if seq_acc > best_acc:
                 best_acc = seq_acc
-                # Save checkpoint for promising runs (>1% accuracy)
-                if best_acc > 0.01:
-                    ckpt_dir = os.path.join(results_dir, "checkpoints")
-                    os.makedirs(ckpt_dir, exist_ok=True)
-                    ckpt_path = os.path.join(ckpt_dir, f"{run_name}_s{seed}_best.pt")
-                    torch.save({"model_state_dict": model.state_dict(),
-                                "accuracy": best_acc, "step": step,
-                                "config": config_name, "algo": algo_name,
-                                "seed": seed}, ckpt_path)
+                # Save best checkpoint (always, no accuracy threshold)
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                ckpt_path = os.path.join(ckpt_dir, f"{run_name}_s{seed}_best.pt")
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": best_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed}, ckpt_path)
+
+            # Periodic checkpoint every 10K steps (always)
+            if step > 0 and step % 10000 == 0:
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                ckpt_path = os.path.join(ckpt_dir, f"{run_name}_s{seed}_step{step}.pt")
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": seq_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed}, ckpt_path)
 
             # Adaptive WD
             if adaptive_wd:
@@ -1105,6 +1343,11 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
                 break
 
     csv_file.close()
+    if grad_log_file is not None:
+        if grad_buffer:
+            grad_log_writer.writerows(grad_buffer)
+            grad_buffer.clear()
+        grad_log_file.close()
     elapsed = time.time() - t0
 
     return {
@@ -1117,11 +1360,372 @@ def train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, result
     }
 
 
+def train_one_lbfgs(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir):
+    """Train with L-BFGS (quasi-Newton, closure-based)."""
+    config_name = arch_cfg["name"]
+    algo_name = algo_cfg["name"]
+    run_name = f"{config_name}__{algo_name}"
+
+    csv_path = os.path.join(results_dir, f"{run_name}_s{seed}.csv")
+    if os.path.exists(csv_path):
+        try:
+            with open(csv_path) as f:
+                lines = f.readlines()
+            if len(lines) > 2:
+                return None
+        except Exception:
+            pass
+
+    random.seed(seed)
+    torch.manual_seed(seed)
+
+    model, n_params = build_model(arch_cfg, device)
+
+    lr = algo_cfg.get("lr", 1.0)
+    batch_size = algo_cfg.get("batch_size", 512)
+
+    optimizer = torch.optim.LBFGS(
+        model.parameters(), lr=lr, max_iter=20,
+        history_size=min(100, n_params * 5),
+        line_search_fn="strong_wolfe",
+    )
+
+    os.makedirs(results_dir, exist_ok=True)
+    csv_file = open(csv_path, "w", newline="")
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["step", "loss", "acc", "lr", "wd"])
+
+    t0 = time.time()
+    best_acc = 0.0
+
+    for step in range(1, max_steps + 1):
+        model.train()
+        full_seq, labels = generate_batch(batch_size, device)
+
+        def closure():
+            optimizer.zero_grad()
+            logits = model(full_seq)
+            shift_logits = logits[:, :-1, :].reshape(-1, VOCAB_SIZE)
+            shift_labels = labels[:, 1:].reshape(-1)
+            loss = F.cross_entropy(shift_logits, shift_labels, ignore_index=-100)
+            loss.backward()
+            return loss
+
+        loss = optimizer.step(closure)
+
+        if step % eval_interval == 0 or step == max_steps:
+            model.eval()
+            with torch.no_grad():
+                seq_acc, _ = evaluate(model, device, n_samples=500)
+
+            loss_val = loss.item()
+            csv_writer.writerow([step, f"{loss_val:.6f}", f"{seq_acc:.4f}", f"{lr:.2e}", "0.0"])
+            csv_file.flush()
+
+            if seq_acc > best_acc:
+                best_acc = seq_acc
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": best_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_best.pt"))
+
+            # Periodic checkpoint every 10K steps (always)
+            if step > 0 and step % 10000 == 0:
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": seq_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_step{step}.pt"))
+
+            if step % (eval_interval * 5) == 0:
+                elapsed = time.time() - t0
+                print(f"    [{run_name} s{seed}] step {step}/{max_steps} "
+                      f"loss={loss_val:.4f} acc={seq_acc:.4f} best={best_acc:.4f} "
+                      f"[{elapsed:.0f}s]", flush=True)
+
+            if seq_acc >= 0.999:
+                print(f"    [{run_name} s{seed}] GROKKED at step {step}!", flush=True)
+                break
+
+    csv_file.close()
+    return {"config": config_name, "algo": algo_name, "seed": seed,
+            "params": n_params, "best_acc": best_acc, "elapsed": time.time() - t0}
+
+
+def train_one_cmaes(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir):
+    """Train with CMA-ES (gradient-free, population-based)."""
+    import cma
+
+    config_name = arch_cfg["name"]
+    algo_name = algo_cfg["name"]
+    run_name = f"{config_name}__{algo_name}"
+
+    csv_path = os.path.join(results_dir, f"{run_name}_s{seed}.csv")
+    if os.path.exists(csv_path):
+        try:
+            with open(csv_path) as f:
+                lines = f.readlines()
+            if len(lines) > 2:
+                return None
+        except Exception:
+            pass
+
+    random.seed(seed)
+    torch.manual_seed(seed)
+
+    model, n_params = build_model(arch_cfg, device)
+    sigma0 = algo_cfg.get("sigma0", 0.5)
+    batch_size = algo_cfg.get("batch_size", 512)
+
+    # Flatten initial params
+    x0 = torch.cat([p.data.flatten() for p in model.parameters() if p.requires_grad]).cpu().numpy()
+    trainable_params = [(n, p) for n, p in model.named_parameters() if p.requires_grad]
+
+    def set_params(x_vec):
+        """Set model params from flat numpy vector."""
+        offset = 0
+        for _, p in trainable_params:
+            numel = p.data.numel()
+            p.data.copy_(torch.tensor(x_vec[offset:offset + numel],
+                         dtype=p.dtype).reshape(p.shape).to(device))
+            offset += numel
+
+    def eval_loss(x_vec):
+        """Evaluate loss for a candidate solution."""
+        set_params(x_vec)
+        model.eval()
+        with torch.no_grad():
+            full_seq, labels = generate_batch(batch_size, device)
+            logits = model(full_seq)
+            shift_logits = logits[:, :-1, :].reshape(-1, VOCAB_SIZE)
+            shift_labels = labels[:, 1:].reshape(-1)
+            loss = F.cross_entropy(shift_logits, shift_labels, ignore_index=-100)
+        return loss.item()
+
+    # CMA-ES options
+    popsize = max(4 + int(3 * math.log(n_params)), 8)
+    opts = {
+        "seed": seed,
+        "maxiter": max_steps,
+        "popsize": popsize,
+        "verb_disp": 0,
+        "verb_log": 0,
+        "verb_filenameprefix": "/dev/null",
+        "tolfun": 1e-8,
+    }
+    es = cma.CMAEvolutionStrategy(x0, sigma0, opts)
+
+    os.makedirs(results_dir, exist_ok=True)
+    csv_file = open(csv_path, "w", newline="")
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["step", "loss", "acc", "lr", "wd"])
+
+    t0 = time.time()
+    best_acc = 0.0
+    step = 0
+
+    while not es.stop() and step < max_steps:
+        solutions = es.ask()
+        fitnesses = [eval_loss(x) for x in solutions]
+        es.tell(solutions, fitnesses)
+        step += 1
+
+        if step % eval_interval == 0 or step == max_steps:
+            # Set to best found so far
+            set_params(es.result.xbest)
+            model.eval()
+            with torch.no_grad():
+                seq_acc, _ = evaluate(model, device, n_samples=500)
+
+            loss_val = min(fitnesses)
+            csv_writer.writerow([step, f"{loss_val:.6f}", f"{seq_acc:.4f}",
+                                 f"{sigma0:.2e}", "0.0"])
+            csv_file.flush()
+
+            if seq_acc > best_acc:
+                best_acc = seq_acc
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": best_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_best.pt"))
+
+            # Periodic checkpoint every 10K steps (always)
+            if step > 0 and step % 10000 == 0:
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": seq_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_step{step}.pt"))
+
+            if step % (eval_interval * 5) == 0:
+                elapsed = time.time() - t0
+                print(f"    [{run_name} s{seed}] gen {step}/{max_steps} "
+                      f"loss={loss_val:.4f} acc={seq_acc:.4f} best={best_acc:.4f} "
+                      f"sigma={es.sigma:.4f} [{elapsed:.0f}s]", flush=True)
+
+            if seq_acc >= 0.999:
+                print(f"    [{run_name} s{seed}] GROKKED at gen {step}!", flush=True)
+                break
+
+    csv_file.close()
+    return {"config": config_name, "algo": algo_name, "seed": seed,
+            "params": n_params, "best_acc": best_acc, "elapsed": time.time() - t0}
+
+
+def train_one_newton(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir):
+    """Train with exact Newton's method (full Hessian, tractable for ≤50 params).
+
+    Uses standard backward + per-grad-element backward for Hessian rows.
+    Optional Tikhonov damping: (H + λI)⁻¹g.
+    """
+    config_name = arch_cfg["name"]
+    algo_name = algo_cfg["name"]
+    run_name = f"{config_name}__{algo_name}"
+
+    csv_path = os.path.join(results_dir, f"{run_name}_s{seed}.csv")
+    if os.path.exists(csv_path):
+        try:
+            with open(csv_path) as f:
+                lines = f.readlines()
+            if len(lines) > 2:
+                return None
+        except Exception:
+            pass
+
+    random.seed(seed)
+    torch.manual_seed(seed)
+
+    model, n_params = build_model(arch_cfg, device)
+    lr = algo_cfg.get("lr", 0.1)
+    batch_size = algo_cfg.get("batch_size", 512)
+    damping = algo_cfg.get("newton_damping", 0.0)
+
+    trainable = [p for p in model.parameters() if p.requires_grad]
+    total_params = sum(p.numel() for p in trainable)
+
+    os.makedirs(results_dir, exist_ok=True)
+    csv_file = open(csv_path, "w", newline="")
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["step", "loss", "acc", "lr", "wd"])
+
+    t0 = time.time()
+    best_acc = 0.0
+
+    for step in range(1, max_steps + 1):
+        model.train()
+        full_seq, labels = generate_batch(batch_size, device)
+
+        # Forward + backward with create_graph for 2nd order
+        logits = model(full_seq)
+        shift_logits = logits[:, :-1, :].reshape(-1, VOCAB_SIZE)
+        shift_labels = labels[:, 1:].reshape(-1)
+        loss = F.cross_entropy(shift_logits, shift_labels, ignore_index=-100)
+
+        # Compute gradient with graph retained
+        grads = torch.autograd.grad(loss, trainable, create_graph=True)
+        flat_grad = torch.cat([g.flatten() for g in grads])
+
+        # Compute Hessian row-by-row
+        hessian = torch.zeros(total_params, total_params, device=device)
+        for i in range(total_params):
+            hess_row_grads = torch.autograd.grad(
+                flat_grad[i], trainable, retain_graph=(i < total_params - 1))
+            hessian[i] = torch.cat([h.flatten() for h in hess_row_grads])
+
+        # Detach for the linear solve
+        flat_grad_d = flat_grad.detach()
+
+        # Add damping: (H + λI)
+        if damping > 0:
+            hessian.add_(torch.eye(total_params, device=device) * damping)
+
+        # Solve H * delta = -grad  →  delta = -H⁻¹g
+        try:
+            delta = torch.linalg.solve(hessian, -flat_grad_d)
+        except Exception:
+            delta = -flat_grad_d
+
+        # Clip newton step
+        delta_norm = delta.norm()
+        if delta_norm > 10.0:
+            delta.mul_(10.0 / delta_norm)
+
+        # Apply update to model params
+        offset = 0
+        with torch.no_grad():
+            for p in trainable:
+                numel = p.numel()
+                p.add_(lr * delta[offset:offset + numel].reshape(p.shape))
+                offset += numel
+
+        # Eval
+        if step % eval_interval == 0 or step == max_steps:
+            model.eval()
+            with torch.no_grad():
+                seq_acc, _ = evaluate(model, device, n_samples=500)
+
+            loss_val = loss.item()
+            csv_writer.writerow([step, f"{loss_val:.6f}", f"{seq_acc:.4f}", f"{lr:.2e}", "0.0"])
+            csv_file.flush()
+
+            if seq_acc > best_acc:
+                best_acc = seq_acc
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": best_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_best.pt"))
+
+            # Periodic checkpoint every 10K steps
+            if step > 0 and step % 10000 == 0:
+                ckpt_dir = os.path.join(results_dir, "checkpoints")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                torch.save({"model_state_dict": model.state_dict(),
+                            "accuracy": seq_acc, "step": step,
+                            "config": config_name, "algo": algo_name,
+                            "seed": seed},
+                           os.path.join(ckpt_dir, f"{run_name}_s{seed}_step{step}.pt"))
+
+            if step % (eval_interval * 5) == 0:
+                elapsed = time.time() - t0
+                print(f"    [{run_name} s{seed}] step {step}/{max_steps} "
+                      f"loss={loss_val:.4f} acc={seq_acc:.4f} best={best_acc:.4f} "
+                      f"[{elapsed:.0f}s]", flush=True)
+
+            if seq_acc >= 0.999:
+                print(f"    [{run_name} s{seed}] GROKKED at step {step}!", flush=True)
+                break
+
+    csv_file.close()
+    return {"config": config_name, "algo": algo_name, "seed": seed,
+            "params": n_params, "best_acc": best_acc, "elapsed": time.time() - t0}
+
+
 def run_worker(args):
     """Multiprocessing worker."""
     arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir = args
     try:
-        return train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir)
+        opt_type = algo_cfg.get("optimizer", "adamw")
+        if opt_type == "lbfgs":
+            return train_one_lbfgs(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir)
+        elif opt_type == "cmaes":
+            return train_one_cmaes(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir)
+        elif opt_type == "newton":
+            return train_one_newton(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir)
+        else:
+            return train_one(arch_cfg, algo_cfg, seed, max_steps, eval_interval, device, results_dir)
     except Exception as e:
         run_name = f"{arch_cfg['name']}__{algo_cfg['name']}"
         print(f"    [{run_name} s{seed}] ERROR: {e}", flush=True)
@@ -1245,6 +1849,8 @@ def main():
     parser.add_argument("--seeds", type=int, nargs="+", default=None)
     parser.add_argument("--max-parallel", type=int, default=None,
                         help="Max parallel processes (default: auto)")
+    parser.add_argument("--max-params", type=int, default=None,
+                        help="Only run configs with <= this many params")
     parser.add_argument("--results-dir", default=RESULTS_DIR)
     parser.add_argument("--summary", action="store_true", help="Print summary and exit")
     parser.add_argument("--dry-run", action="store_true", help="Show what would run")
@@ -1256,6 +1862,8 @@ def main():
 
     # Filter configs
     configs = CONFIGS
+    if args.max_params:
+        configs = [c for c in configs if c.get("params", 999) <= args.max_params]
     if args.config:
         configs = [c for c in CONFIGS if args.config in c["name"]]
         if not configs:
@@ -1292,6 +1900,9 @@ def main():
                         pass
                 tasks.append((cfg, algo, seed, args.max_steps, args.eval_interval,
                              args.device, args.results_dir))
+
+    # Sort tasks by param count (smallest first), then algo, then seed
+    tasks.sort(key=lambda t: (t[0].get("params", 999), t[1]["name"], t[2]))
 
     total_possible = len(configs) * len(algos) * len(seeds)
     print(f"Sub-50p Sweep: {len(configs)} configs × {len(algos)} algos × {len(seeds)} seeds = {total_possible} total")
@@ -1374,7 +1985,7 @@ def main():
             "--max-parallel", "1",
         ]
         env = os.environ.copy()
-        env["OMP_NUM_THREADS"] = "2"
+        env["OMP_NUM_THREADS"] = env.get("OMP_NUM_THREADS", "2")
         proc = subprocess.Popen(
             cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env)
         active[proc.pid] = (proc, cfg["name"], algo["name"], seed)

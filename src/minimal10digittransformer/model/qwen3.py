@@ -82,7 +82,8 @@ class RMSNorm(nn.Module):
 class Qwen3Attention(nn.Module):
     def __init__(self, d_model: int, n_heads: int, n_kv_heads: int,
                  head_dim: int, rope_cos: torch.Tensor, rope_sin: torch.Tensor,
-                 qk_norm: bool = True, tie_kv: bool = False, tie_qo: bool = False):
+                 qk_norm: bool = True, tie_kv: bool = False, tie_qo: bool = False,
+                 share_qk_norm: bool = False):
         super().__init__()
         self.n_heads = n_heads
         self.n_kv_heads = n_kv_heads
@@ -102,7 +103,7 @@ class Qwen3Attention(nn.Module):
         # Qwen3 has Q/K norms (optional)
         if qk_norm:
             self.q_norm = RMSNorm(head_dim)
-            self.k_norm = RMSNorm(head_dim)
+            self.k_norm = self.q_norm if share_qk_norm else RMSNorm(head_dim)
 
         self.register_buffer("rope_cos", rope_cos, persistent=False)
         self.register_buffer("rope_sin", rope_sin, persistent=False)
@@ -146,7 +147,8 @@ class Qwen3Attention(nn.Module):
 
 class Qwen3MLP(nn.Module):
     def __init__(self, d_model: int, intermediate_size: int, use_swiglu: bool = True,
-                 tie_gate: bool = False, activation: str = "default"):
+                 tie_gate: bool = False, activation: str = "default",
+                 mlp_bias: bool = False):
         super().__init__()
         self.use_swiglu = use_swiglu
         self.tie_gate = tie_gate
@@ -156,9 +158,9 @@ class Qwen3MLP(nn.Module):
         if use_swiglu:
             if not tie_gate:
                 self.gate_proj = nn.Linear(d_model, intermediate_size, bias=False)
-            self.up_proj = nn.Linear(d_model, intermediate_size, bias=False)
+            self.up_proj = nn.Linear(d_model, intermediate_size, bias=mlp_bias)
         else:
-            self.up_proj = nn.Linear(d_model, intermediate_size, bias=False)
+            self.up_proj = nn.Linear(d_model, intermediate_size, bias=mlp_bias)
         self.down_proj = nn.Linear(intermediate_size, d_model, bias=False)
 
     def _act(self, x):
@@ -187,7 +189,8 @@ class Qwen3Block(nn.Module):
                  head_dim: int, ff: int, rope_cos, rope_sin,
                  qk_norm: bool = True, use_swiglu: bool = True, tie_kv: bool = False,
                  tie_qo: bool = False, tie_gate: bool = False,
-                 shared_norm: nn.Module = None, activation: str = "default"):
+                 shared_norm: nn.Module = None, activation: str = "default",
+                 share_qk_norm: bool = False, mlp_bias: bool = False):
         super().__init__()
         if shared_norm is not None:
             self.ln1 = shared_norm
@@ -195,8 +198,8 @@ class Qwen3Block(nn.Module):
         else:
             self.ln1 = RMSNorm(d_model)
             self.ln2 = RMSNorm(d_model)
-        self.attn = Qwen3Attention(d_model, n_heads, n_kv_heads, head_dim, rope_cos, rope_sin, qk_norm=qk_norm, tie_kv=tie_kv, tie_qo=tie_qo)
-        self.mlp = Qwen3MLP(d_model, ff, use_swiglu=use_swiglu, tie_gate=tie_gate, activation=activation)
+        self.attn = Qwen3Attention(d_model, n_heads, n_kv_heads, head_dim, rope_cos, rope_sin, qk_norm=qk_norm, tie_kv=tie_kv, tie_qo=tie_qo, share_qk_norm=share_qk_norm)
+        self.mlp = Qwen3MLP(d_model, ff, use_swiglu=use_swiglu, tie_gate=tie_gate, activation=activation, mlp_bias=mlp_bias)
 
     def forward(self, x, mask=None):
         x = x + self.attn(self.ln1(x), mask)
@@ -213,7 +216,8 @@ class Qwen3AdditionModel(nn.Module):
                  use_swiglu: bool = True, tie_kv: bool = False,
                  tie_qo: bool = False, tie_gate: bool = False, repeats: int = 1,
                  share_norms: bool = False, share_block_norms: bool = False,
-                 activation: str = "default", window_size: int = 0):
+                 activation: str = "default", window_size: int = 0,
+                 share_qk_norm: bool = False, mlp_bias: bool = False):
         super().__init__()
         self.d_model = d_model
         self.repeats = repeats
@@ -240,7 +244,8 @@ class Qwen3AdditionModel(nn.Module):
                                 rope_cos, rope_sin, qk_norm=qk_norm,
                                 use_swiglu=use_swiglu, tie_kv=tie_kv,
                                 tie_qo=tie_qo, tie_gate=tie_gate,
-                                shared_norm=shared_norm, activation=activation)
+                                shared_norm=shared_norm, activation=activation,
+                                share_qk_norm=share_qk_norm, mlp_bias=mlp_bias)
         self.final_norm = shared_norm if share_norms else RMSNorm(d_model)
 
         # Causal mask (with optional sliding window)

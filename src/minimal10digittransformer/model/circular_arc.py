@@ -37,14 +37,19 @@ class CircularArcQwen3(nn.Module):
                  tie_qo: bool = False, tie_gate: bool = False, repeats: int = 1,
                  share_norms: bool = False, share_block_norms: bool = False,
                  activation: str = "default", window_size: int = 0,
+                 share_qk_norm: bool = False, mlp_bias: bool = False,
                  arc_init_A: float = 2.5, arc_init_start: float = -1.2,
-                 arc_init_stride: float = 0.29):
+                 arc_init_stride: float = 0.29, fix_arc_A: float = None):
         super().__init__()
         self.d_model = d_model
         self.repeats = repeats
 
-        # Circular arc embedding params (3 params, replaces 30-param nn.Embedding)
-        self.arc_A = nn.Parameter(torch.tensor(arc_init_A))
+        # Circular arc embedding params (3 or 2 params)
+        if fix_arc_A is not None:
+            # Fixed amplitude (not learnable), saves 1 param
+            self.register_buffer("arc_A", torch.tensor(fix_arc_A))
+        else:
+            self.arc_A = nn.Parameter(torch.tensor(arc_init_A))
         self.arc_start = nn.Parameter(torch.tensor(arc_init_start))
         self.arc_stride = nn.Parameter(torch.tensor(arc_init_stride))
 
@@ -64,7 +69,8 @@ class CircularArcQwen3(nn.Module):
                                 rope_cos, rope_sin, qk_norm=qk_norm,
                                 use_swiglu=use_swiglu, tie_kv=tie_kv,
                                 tie_qo=tie_qo, tie_gate=tie_gate,
-                                shared_norm=shared_norm, activation=activation)
+                                shared_norm=shared_norm, activation=activation,
+                                share_qk_norm=share_qk_norm, mlp_bias=mlp_bias)
         self.final_norm = shared_norm if share_norms else RMSNorm(d_model)
 
         # Causal mask (with optional sliding window)

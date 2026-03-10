@@ -100,6 +100,8 @@ experiments/archive/
 !checkpoints/qwen3_arc_45p_KrotQ_targeted/*
 !checkpoints/qwen3_arc_41p_KrotQ_s36_targeted/
 !checkpoints/qwen3_arc_41p_KrotQ_s36_targeted/*
+!checkpoints/qwen3_arc_36p_KrotQ_downRotUpT_micro_targeted/
+!checkpoints/qwen3_arc_36p_KrotQ_downRotUpT_micro_targeted/*
 
 # Scripts
 !scripts/
