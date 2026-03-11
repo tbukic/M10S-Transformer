@@ -39,15 +39,17 @@ class CircularArcQwen3(nn.Module):
                  activation: str = "default", window_size: int = 0,
                  share_qk_norm: bool = False, mlp_bias: bool = False,
                  arc_init_A: float = 2.5, arc_init_start: float = -1.2,
-                 arc_init_stride: float = 0.29, fix_arc_A: float = None):
+                 arc_init_stride: float = 0.29, fix_arc_A: float = None,
+                 drop_A: bool = False):
         super().__init__()
         self.d_model = d_model
         self.repeats = repeats
+        self.drop_A = drop_A or (fix_arc_A is not None)
 
-        # Circular arc embedding params (3 or 2 params)
-        if fix_arc_A is not None:
-            # Fixed amplitude (not learnable), saves 1 param
-            self.register_buffer("arc_A", torch.tensor(fix_arc_A))
+        # Circular arc embedding params
+        if self.drop_A:
+            # No amplitude parameter: emb = [cos(...), sin(...), 0]
+            pass
         else:
             self.arc_A = nn.Parameter(torch.tensor(arc_init_A))
         self.arc_start = nn.Parameter(torch.tensor(arc_init_start))
@@ -84,28 +86,28 @@ class CircularArcQwen3(nn.Module):
         """Compute token embedding table from arc parameters.
 
         Returns (VOCAB_SIZE, d_model) tensor.
-        For d_model=3: [A*cos(start + d*stride), A*sin(start + d*stride), 0]
+        drop_A:  [cos(start + d*stride), sin(start + d*stride), 0]
+        with A:  [A*cos(start + d*stride), A*sin(start + d*stride), 0]
         """
-        d = torch.arange(VOCAB_SIZE, device=self.arc_A.device, dtype=self.arc_A.dtype)
+        device = self.arc_start.device
+        dtype = self.arc_start.dtype
+        d = torch.arange(VOCAB_SIZE, device=device, dtype=dtype)
         angles = self.arc_start + d * self.arc_stride
+        c = torch.cos(angles)
+        s = torch.sin(angles)
+
+        if not self.drop_A:
+            c = self.arc_A * c
+            s = self.arc_A * s
 
         if self.d_model == 2:
-            return torch.stack([
-                self.arc_A * torch.cos(angles),
-                self.arc_A * torch.sin(angles),
-            ], dim=1)
+            return torch.stack([c, s], dim=1)
         elif self.d_model == 3:
-            return torch.stack([
-                self.arc_A * torch.cos(angles),
-                self.arc_A * torch.sin(angles),
-                torch.zeros_like(angles),
-            ], dim=1)
+            return torch.stack([c, s, torch.zeros_like(c)], dim=1)
         else:
-            # For d_model > 3, pad with zeros
-            emb = torch.zeros(VOCAB_SIZE, self.d_model, device=self.arc_A.device,
-                              dtype=self.arc_A.dtype)
-            emb[:, 0] = self.arc_A * torch.cos(angles)
-            emb[:, 1] = self.arc_A * torch.sin(angles)
+            emb = torch.zeros(VOCAB_SIZE, self.d_model, device=device, dtype=dtype)
+            emb[:, 0] = c
+            emb[:, 1] = s
             return emb
 
     @staticmethod

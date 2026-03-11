@@ -18,7 +18,7 @@ from minimal10digittransformer.data.addition import encode
 
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
-_CHECKPOINT = _PROJECT_ROOT / "checkpoints" / "qwen3_arc_36p_KrotQ_downRotUpT_micro_targeted" / "best.pt"
+_CHECKPOINT = _PROJECT_ROOT / "checkpoints" / "qwen3_arc_36p_KrotQ_downRotUpT_s8_targeted" / "best.pt"
 
 METADATA = {
     "name": "M10S-36p",
@@ -35,8 +35,8 @@ METADATA = {
         "down = rotation(up^T) (1-param rotation + transpose replaces 6-param down projection)",
         "RoPE (zero params)",
         "SwiGLU MLP at ff=2",
-        "Curriculum + Grokfast-EMA + adaptive weight decay",
-        "Micro-targeted fine-tuning (iterative, ultra-gentle lr=1e-5 to 5e-5)",
+        "Grokfast-EMA gradient filter (alpha=0.98, lambda=3.0)",
+        "Iterated targeted fine-tuning (2 rounds, 70 cumulative error pairs, lr=1e-4)",
     ],
 }
 
